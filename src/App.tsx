@@ -11,10 +11,11 @@ import SingleReview from './components/SingleReview';
 export interface singleReviewObj {
   review_id: number;
   title: string;
-  designer: string;
   owner: string;
-  review_img_url: string;
   category: string;
+  review_body: string;
+  designer: string;
+  review_img_url: string;
   created_at: string;
   review_votes: number;
   comment_count: number;
