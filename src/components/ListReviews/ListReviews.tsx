@@ -1,20 +1,22 @@
 import { singleReviewObj } from "../../App";
 import ReviewListingCard from "./ReviewListingCard";
+import "./ListReviews.css";
 
 interface IProps {
     reviewListData: singleReviewObj[]
 }
 
 const ListReviews: React.FC<IProps> = ({ reviewListData }) => {
-    console.log(reviewListData);
     return (
-        <div className="list-reviews-container">
-            <h2>List Reviews</h2>
-            {
-                reviewListData.map(reviewData => {
-                    return <ReviewListingCard key={reviewData.review_id} reviewData={reviewData} />
-                })
-            }
+        <div className="reviews-page-container">
+            <h1 id="reviews-page-title">Reviews</h1>
+            <div id="list-reviews-container">
+                {
+                    reviewListData.map(reviewData => {
+                        return <ReviewListingCard key={reviewData.review_id} reviewData={reviewData} />
+                    })
+                }
+            </div>
         </div>
     )
 }
