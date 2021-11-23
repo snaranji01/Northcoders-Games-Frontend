@@ -1,0 +1,10 @@
+#navbar {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.navbar-link {
+    text-decoration: none;
+    margin-left: 10px;
+}
