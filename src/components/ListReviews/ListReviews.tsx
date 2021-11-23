@@ -3,13 +3,20 @@ import { singleReviewObj } from "../../App";
 import ReviewListingCard from "./ReviewListingCard";
 import "./ListReviews.css";
 import { getReviews } from "../../api";
+import { useParams } from "react-router-dom";
 
 const ListReviews = () => {
     const [reviewListData, setReviewListData] = useState<singleReviewObj[]>([]);
 
+    let { category } = useParams();
+
     useEffect(() => {
-        getReviews().then(response => setReviewListData(response))
-    }, [])
+        getReviews(category)
+            .then(allReviews => setReviewListData(allReviews))
+            .catch(console.log)
+
+    }, [category])
+
     return (
         <div className="reviews-page-container">
             <h1 id="reviews-page-title">Reviews</h1>

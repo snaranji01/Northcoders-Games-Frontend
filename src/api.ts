@@ -4,9 +4,12 @@ const ncgamesAPI: AxiosInstance = axios.create({
     baseURL: "https://nc-games-backend-snaranji01.herokuapp.com/api"
 });
 
-export const getReviews = () => {
+export const getReviews = (category: string | undefined) => {
+    // set query
+    const query = category === undefined ? "/reviews"
+        : `reviews?category=${category}`;
     return ncgamesAPI
-        .get('/reviews')
+        .get(query)
         .then(response => {
             return response.data.reviews;
         })
