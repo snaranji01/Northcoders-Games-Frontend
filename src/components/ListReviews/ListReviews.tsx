@@ -16,7 +16,7 @@ const ListReviews = () => {
             .catch(console.log)
 
     }, [category])
-
+    
     return (
         <div className="reviews-page-container">
             <h1 id="reviews-page-title">Reviews</h1>

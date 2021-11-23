@@ -4,17 +4,12 @@ import { getCategories } from "../../api";
 import './Navbar.css';
 
 
-interface IProps {
-    selectedCategory: string;
-    setSelectedCategory: Dispatch<SetStateAction<string>>;
-}
-
 interface resCategory {
     slug: string;
     description: string;
 }
 
-const Navbar: React.FC<IProps> = ({ selectedCategory, setSelectedCategory }) => {
+const Navbar = () => {
 
     const [allCategories, setAllCategories] = useState<string[]>([])
 

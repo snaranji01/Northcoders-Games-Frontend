@@ -21,11 +21,10 @@ export interface singleReviewObj {
 
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState<string>(''); 
 
   return (
     <BrowserRouter>
-      <Navbar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+      <Navbar />
       <div id="App">
         <Routes>
           <Route path="/" element={<Homepage />} />
