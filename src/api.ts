@@ -8,7 +8,14 @@ export const getReviews = () => {
     return ncgamesAPI
         .get('/reviews')
         .then(response => {
-            return response.data.reviews
+            return response.data.reviews;
         })
 }
 
+export const getCategories = () => {
+    return ncgamesAPI
+        .get('/categories')
+        .then(response => {
+            return response.data.categories;
+        })
+}
