@@ -1,12 +1,15 @@
+import { useEffect, useState } from "react";
 import { singleReviewObj } from "../../App";
 import ReviewListingCard from "./ReviewListingCard";
 import "./ListReviews.css";
+import { getReviews } from "../../api";
 
-interface IProps {
-    reviewListData: singleReviewObj[]
-}
+const ListReviews = () => {
+    const [reviewListData, setReviewListData] = useState<singleReviewObj[]>([]);
 
-const ListReviews: React.FC<IProps> = ({ reviewListData }) => {
+    useEffect(() => {
+        getReviews().then(response => setReviewListData(response))
+    }, [])
     return (
         <div className="reviews-page-container">
             <h1 id="reviews-page-title">Reviews</h1>
