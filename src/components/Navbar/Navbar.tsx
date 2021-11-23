@@ -1,11 +1,49 @@
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../api";
 import './Navbar.css';
 
-const Navbar = () => {
-    return(
+
+interface IProps {
+    selectedCategory: string;
+    setSelectedCategory: Dispatch<SetStateAction<string>>;
+}
+
+interface resCategory {
+    slug: string;
+    description: string;
+}
+
+const Navbar: React.FC<IProps> = ({ selectedCategory, setSelectedCategory }) => {
+
+    const [allCategories, setAllCategories] = useState<string[]>([])
+
+    useEffect(() => {
+        getCategories()
+            .then(resCategories => {
+                const categoriesArray = resCategories.map((category: resCategory): string => category.slug);
+                setAllCategories(categoriesArray);
+            })
+    }, [])
+
+
+
+    return (
         <nav id="navbar">
-            <Link className="navbar-link" to="/">Home</Link>
-            <Link className="navbar-link" to="/reviews">Reviews</Link>
+            <Link className="navbar-item" to="/">Home</Link>
+            <Link className="navbar-item" to="/reviews">Reviews</Link>
+            <div className="navbar-item">
+                <Link to="/reviews">Categories</Link>
+                <div className="dropdown-content">
+                    {
+                        allCategories.map(category => {
+                            return  <Link key={category} className="navbar-link-categories" to={`/reviews/${category}`}>{category}</Link>
+                        })
+                    }
+                    
+                   
+                </div>
+            </div>
         </nav>
     )
 }

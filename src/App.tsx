@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Homepage from './components/Homepage';
 import ListReviews from './components/ListReviews/ListReviews';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import SingleReview from './components/SingleReview';
 
 export interface singleReviewObj {
@@ -20,13 +21,16 @@ export interface singleReviewObj {
 
 
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState<string>(''); 
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <div id="App">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/reviews" element={<ListReviews />} />
+          <Route path="/reviews/:category" element={<ListReviews />} />
           <Route path="/reviews/:review_id" element={<SingleReview />} />
         </Routes>
       </div>

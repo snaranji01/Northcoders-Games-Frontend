@@ -4,7 +4,12 @@
     align-content: flex-start;
 }
 
-.navbar-link {
+.navbar-item {
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.navbar-link-categories {
     text-decoration: none;
     margin-left: 10px;
 }
