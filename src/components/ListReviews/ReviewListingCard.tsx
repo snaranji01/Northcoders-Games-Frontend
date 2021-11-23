@@ -1,5 +1,4 @@
 import { HiArrowUp } from 'react-icons/hi';
-
 import { singleReviewObj } from "../../App";
 
 
@@ -30,8 +29,10 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         return first30Words.join(" ");
     }
 
+    
+
     return (
-        <div className="review-listing-card">
+        <section className="review-listing-card">
             <div className="review-listing-card-title">{title}</div>
             <div className="review-listing-card-additional-info">
                 <p className="review-listing-card-author">Author: {owner}</p>
@@ -48,7 +49,7 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
             <div className="review-listing-card-content-preview">
                 <p>{formatReviewBody(review_body)}...</p>
             </div>
-        </div>
+        </section>
 
 
     )
