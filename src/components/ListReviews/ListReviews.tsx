@@ -3,7 +3,6 @@ import { IFilterParams, singleReviewObj } from "../../App";
 import ReviewListingCard from "./ReviewListingCard";
 import "./ListReviews.css";
 import { getReviews } from "../../api";
-import { StringLiteral } from "@babel/types";
 
 interface IProps {
     allCategories: string[];
@@ -25,6 +24,8 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
 
     // sort-filter-panel
     // 1) category
+    
+
     interface FormatCategoriesRefObj {
         [backendName: string]: string
     }
