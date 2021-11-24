@@ -29,12 +29,26 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         return first30Words.join(" ");
     }
 
+    interface FormatCategoriesRefObj {
+        [backendName: string]: string
+    }
+
+    const formatCategoriesRefObj: FormatCategoriesRefObj =  {
+        "strategy": "Strategy",
+        "hidden-roles": "Hidden Roles",
+        "dexterity": "Dexterity",
+        "push-your-luck": "Push Your Luck",
+        "roll-and-write": "Roll And Write",
+        "deck-building": "Deck Building",
+        "engine-building": "Engine Building"
+    };
+
     return (
         <section className="review-listing-card">
             <div className="review-listing-card-title">{title}</div>
             <div className="review-listing-card-additional-info">
                 <p className="review-listing-card-author">Author: {owner}</p>
-                <p className="review-listing-card-category">Category: {category}</p>
+                <p className="review-listing-card-category">Category: {formatCategoriesRefObj[category]}</p>
                 <p className="review-listing-card-createdat">Created at: {formatCreatedAt(created_at)}</p>
             </div>
             <div className="review-listing-card-upvotes"><p>
