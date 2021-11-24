@@ -26,6 +26,12 @@ export const getReviews = (filterParams: IFilterParams) => {
         })
 }
 
+export const getReviewById = (review_id: string | undefined) => {
+    return ncgamesAPI
+        .get(`/reviews/${review_id}`)
+        .then(response => response.data.review)
+}
+
 export const getCategories = () => {
     return ncgamesAPI
         .get('/categories')
