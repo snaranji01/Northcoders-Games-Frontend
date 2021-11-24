@@ -1,42 +1,34 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getCategories } from "../../api";
+import { IFilterParams } from "../../App";
 import './Navbar.css';
 
 
-interface resCategory {
-    slug: string;
-    description: string;
+interface IProps {
+    allCategories: string[];
+    filterParams: IFilterParams;
+    setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
 }
 
-const Navbar = () => {
-
-    const [allCategories, setAllCategories] = useState<string[]>([])
-
-    useEffect(() => {
-        getCategories()
-            .then(resCategories => {
-                const categoriesArray = resCategories.map((category: resCategory): string => category.slug);
-                setAllCategories(categoriesArray);
-            })
-    }, [])
-
-
-
+const Navbar: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
     return (
         <nav id="navbar">
             <Link className="navbar-item" to="/">Home</Link>
             <Link className="navbar-item" to="/reviews">Reviews</Link>
             <div className="navbar-item">
-                <Link to="/reviews">Categories</Link>
+                Categories
                 <div className="dropdown-content">
                     {
                         allCategories.map(category => {
-                            return  <Link key={category} className="navbar-link-categories" to={`/reviews/${category}`}>{category}</Link>
+                            return <Link
+                                key={category}
+                                className="navbar-link-categories"
+                                to={`/reviews?category=${category}`}
+                                onClick={() => setFilterParams(filterParams => ({...filterParams, category}))}
+                            >{category}
+                            </Link>
                         })
                     }
-                    
-                   
                 </div>
             </div>
         </nav>

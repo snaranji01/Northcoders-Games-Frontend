@@ -1,15 +1,26 @@
 import axios, { AxiosInstance } from 'axios';
+import { IFilterParams } from './App';
 
 const ncgamesAPI: AxiosInstance = axios.create({
     baseURL: "https://nc-games-backend-snaranji01.herokuapp.com/api"
 });
 
-export const getReviews = (category: string | undefined) => {
-    // set query
-    const query = category === undefined ? "/reviews"
-        : `reviews?category=${category}`;
+interface IParams {
+    sort_by: string;
+    order: string;
+    category: string;
+}
+
+export const getReviews = (filterParams: IFilterParams) => {
+
+    const params = {
+        sort_by: filterParams.sortBy,
+        order: filterParams.order,
+        category: filterParams.category
+    }
+
     return ncgamesAPI
-        .get(query)
+        .get('/reviews', { params })
         .then(response => {
             return response.data.reviews;
         })
