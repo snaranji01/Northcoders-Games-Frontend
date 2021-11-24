@@ -29,8 +29,6 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         return first30Words.join(" ");
     }
 
-    
-
     return (
         <section className="review-listing-card">
             <div className="review-listing-card-title">{title}</div>
