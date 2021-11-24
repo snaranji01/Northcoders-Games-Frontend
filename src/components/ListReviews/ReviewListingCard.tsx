@@ -1,4 +1,5 @@
 import { HiArrowUp } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import { singleReviewObj } from "../../App";
 
 
@@ -7,7 +8,7 @@ interface IProps {
 }
 const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
     const {
-        title, owner, review_img_url, category, created_at, review_votes, review_body,
+        review_id, title, owner, review_img_url, category, created_at, review_votes, review_body,
     } = reviewData;
 
     const formatCreatedAt = (serverResponseString: string): string => {
@@ -44,7 +45,7 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
     };
 
     return (
-        <section className="review-listing-card">
+        <div className="review-listing-card">
             <div className="review-listing-card-title">{title}</div>
             <div className="review-listing-card-additional-info">
                 <p className="review-listing-card-author">Author: {owner}</p>
@@ -59,9 +60,9 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
             </div>
             <img className="review-listing-card-image" src={review_img_url} alt="The game that was reviewed" />
             <div className="review-listing-card-content-preview">
-                <p>{formatReviewBody(review_body)}...</p>
+                <p>{formatReviewBody(review_body)}... <Link to={`/reviews/${review_id}`}>Read more</Link> </p>
             </div>
-        </section>
+        </div>
 
 
     )
