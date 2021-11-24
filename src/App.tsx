@@ -33,9 +33,6 @@ export interface IFilterParams {
 
 function App() {
   const [allCategories, setAllCategories] = useState<string[]>([]);
-  // const [filterCategory, setFilterCategory] = useState<string>('');
-  // const [filterSortBy, setFilterSortBy] = useState<string>('');
-  // const [filterOrder, setFilterOrder] = useState<string>('');
   const [filterParams, setFilterParams] = useState<IFilterParams>({
     category: '',
     sortBy: '',
