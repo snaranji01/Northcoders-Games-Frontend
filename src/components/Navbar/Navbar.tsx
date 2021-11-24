@@ -10,7 +10,21 @@ interface IProps {
     setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
 }
 
-const Navbar: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
+interface FormatCategoriesRefObj {
+    [backendName: string]: string
+}
+
+const formatCategoriesRefObj: FormatCategoriesRefObj =  {
+    "strategy": "Strategy",
+    "hidden-roles": "Hidden Roles",
+    "dexterity": "Dexterity",
+    "push-your-luck": "Push Your Luck",
+    "roll-and-write": "Roll And Write",
+    "deck-building": "Deck Building",
+    "engine-building": "Engine Building"
+};
+
+const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
     return (
         <nav id="navbar">
             <Link className="navbar-item" to="/">Home</Link>
@@ -25,7 +39,7 @@ const Navbar: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams
                                 className="navbar-link-categories"
                                 to={`/reviews?category=${category}`}
                                 onClick={() => setFilterParams(filterParams => ({...filterParams, category}))}
-                            >{category}
+                            >{formatCategoriesRefObj[category]}
                             </Link>
                         })
                     }
