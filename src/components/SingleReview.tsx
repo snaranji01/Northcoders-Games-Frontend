@@ -63,18 +63,30 @@ const SingleReview = () => {
                 </div>
                 <div className="comment-section">
                     <h2>Comments</h2>
-                    {
-                        reviewComments.map(reviewComment => {
-                            return(
-                                <div className="review-comment">
-                                    <p>{reviewComment.author}</p>
-                                    <p>{reviewComment.created_at}</p>
-                                    <p>{reviewComment.body}</p>
-                                    <p>{reviewComment.comment_votes}</p>
-                                </div>
-                            ) 
-                        })
-                    }
+                    <div className="add-comment">
+                        <form>
+                            <label htmlFor="add-comment-input">Add a comment: </label>
+                            <input type="text" name="add-comment-input" id="add-comment-input" />
+                            <button>Post comment</button>
+                        </form>
+
+                    </div>
+                    <div className="comments-list">
+                        {
+                            reviewComments.map(reviewComment => {
+                                return (
+                                    <div className="review-comment">
+                                        <p>{reviewComment.author}</p>
+                                        <p>{reviewComment.created_at}</p>
+                                        <p>{reviewComment.body}</p>
+                                        <p>{reviewComment.comment_votes}</p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+
+
                 </div>
             </div>
         ) : <p>Loading...</p>
