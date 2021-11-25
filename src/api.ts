@@ -47,3 +47,11 @@ export const getUsers = () => {
             return response.data.users;
         })
 }
+
+export const getUserByUsername = (username: string) => {
+    return ncgamesAPI
+        .get(`/users/${username}`)
+        .then(response => {
+            return response.data.user;
+        })
+}

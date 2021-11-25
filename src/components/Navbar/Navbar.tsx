@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IFilterParams } from "../../App";
+import { UserContext } from "../../contexts/User";
 import './Navbar.css';
 
 
@@ -25,6 +26,7 @@ const formatCategoriesRefObj: FormatCategoriesRefObj =  {
 };
 
 const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
+    const {currentUser} = useContext(UserContext);
     return (
         <nav id="navbar">
             <Link className="navbar-item" to="/">Home</Link>
@@ -44,6 +46,11 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
                         })
                     }
                 </div>
+            </div>
+            <Link className="navbar-item" to="/users">Users</Link>
+            <div id='current-user-icon'>
+                <div>Username: {currentUser.username}</div>
+                <img id="current-user-avatar" src={currentUser.avatar_url} alt="Current user's avatar" />
             </div>
         </nav>
     )

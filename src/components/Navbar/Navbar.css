@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-content: flex-start;
+    height: 5vh;
 }
 
 .navbar-item {
@@ -12,4 +13,12 @@
 .navbar-link-categories {
     text-decoration: none;
     margin-left: 10px;
+}
+
+#current-user-icon {
+    margin-left: auto;
+}
+
+#current-user-avatar {
+    width: 5vw;
 }

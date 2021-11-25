@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getReviewById, getReviewCommentsById } from "../api";
-import { singleReviewObj } from "../App";
+import { getReviewById, getReviewCommentsById } from "../../api";
+import { singleReviewObj } from "../../App";
 
 interface ReviewCommentObj {
     comment_id: number;
@@ -90,9 +90,6 @@ const SingleReview = () => {
                 </div>
             </div>
         ) : <p>Loading...</p>
-
-
-
     )
 }
 
