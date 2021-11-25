@@ -15,7 +15,7 @@ interface FormatCategoriesRefObj {
     [backendName: string]: string
 }
 
-const formatCategoriesRefObj: FormatCategoriesRefObj =  {
+const formatCategoriesRefObj: FormatCategoriesRefObj = {
     "strategy": "Strategy",
     "hidden-roles": "Hidden Roles",
     "dexterity": "Dexterity",
@@ -26,25 +26,28 @@ const formatCategoriesRefObj: FormatCategoriesRefObj =  {
 };
 
 const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
-    const {currentUser} = useContext(UserContext);
+    const { currentUser } = useContext(UserContext);
     return (
         <nav id="navbar">
             <Link className="navbar-item" to="/">Home</Link>
             <Link className="navbar-item" to="/reviews">Reviews</Link>
             <div className="navbar-item">
-                Categories
-                <div className="dropdown-content">
-                    {
-                        allCategories.map(category => {
-                            return <Link
-                                key={category}
-                                className="navbar-link-categories"
-                                to={`/reviews?category=${category}`}
-                                onClick={() => setFilterParams(filterParams => ({...filterParams, category}))}
-                            >{formatCategoriesRefObj[category]}
-                            </Link>
-                        })
-                    }
+                <div className="dropdown">
+                    <span>Categories</span>
+                    <div className="dropdown-content">
+                        {
+                            allCategories.map(category => {
+                                return <Link to={`/reviews?category=${category}`}>
+                                <p
+                                    key={category}
+                                    className="navbar-link-categories"
+                                    onClick={() => setFilterParams(filterParams => ({ ...filterParams, category }))}
+                                >{formatCategoriesRefObj[category]}
+                                </p>
+                                </Link>
+                            })
+                        }
+                    </div>
                 </div>
             </div>
             <Link className="navbar-item" to="/users">Users</Link>

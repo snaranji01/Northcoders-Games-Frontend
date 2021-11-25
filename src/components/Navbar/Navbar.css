@@ -22,3 +22,23 @@
 #current-user-avatar {
     width: 5vw;
 }
+
+/* dropdown categories */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 150px;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+.navbar-link-categories{
+    margin-top: -5px;
+}
+
