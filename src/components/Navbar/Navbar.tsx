@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { Link } from "react-router-dom";
 import { IFilterParams } from "../../App";
 import { UserContext } from "../../contexts/User";
@@ -37,9 +37,8 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
                     <div className="dropdown-content">
                         {
                             allCategories.map(category => {
-                                return <Link to={`/reviews?category=${category}`}>
+                                return <Link key={category} to={`/reviews?category=${category}`}>
                                 <p
-                                    key={category}
                                     className="navbar-link-categories"
                                     onClick={() => setFilterParams(filterParams => ({ ...filterParams, category }))}
                                 >{formatCategoriesRefObj[category]}
