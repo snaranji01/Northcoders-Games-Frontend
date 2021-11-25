@@ -32,6 +32,12 @@ export const getReviewById = (review_id: string | undefined) => {
         .then(response => response.data.review)
 }
 
+export const getReviewCommentsById = (review_id: string | undefined) => {
+    return ncgamesAPI
+        .get(`/reviews/${review_id}/comments`)
+        .then(response => response.data.reviewComments)
+}
+
 export const getCategories = () => {
     return ncgamesAPI
         .get('/categories')

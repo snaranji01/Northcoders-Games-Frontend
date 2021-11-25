@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getReviewById } from "../api";
+import { getReviewById, getReviewCommentsById } from "../api";
 import { singleReviewObj } from "../App";
+
+interface ReviewCommentObj {
+    comment_id: number;
+    author: string;
+    comment_votes: 0;
+    body: string;
+    review_id: number;
+    created_at: string;
+}
 
 const SingleReview = () => {
     const { review_id } = useParams();
@@ -18,16 +27,24 @@ const SingleReview = () => {
         review_votes: 0,
         comment_count: 0,
     });
-    const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const [reviewComments, setReviewComments] = useState<ReviewCommentObj[]>([]);
+
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getReviewById(review_id)
             .then(response => {
                 setSingleReviewData(response)
-                setIsLoading(false);
-                console.log('here')
             })
+            .then(() => {
+                return getReviewCommentsById(review_id)
+            })
+            .then(response => {
+                setReviewComments(response)
+                setIsLoading(false)
+            })
+
     }, [])
 
     return (
@@ -43,6 +60,21 @@ const SingleReview = () => {
                     <p>Review votes: {singleReviewData.review_votes}</p>
                     <p>Comment count: {singleReviewData.comment_count}</p>
                     <img src={singleReviewData.review_img_url} alt="The game being reviewed" />
+                </div>
+                <div className="comment-section">
+                    <h2>Comments</h2>
+                    {
+                        reviewComments.map(reviewComment => {
+                            return(
+                                <div className="review-comment">
+                                    <p>{reviewComment.author}</p>
+                                    <p>{reviewComment.created_at}</p>
+                                    <p>{reviewComment.body}</p>
+                                    <p>{reviewComment.comment_votes}</p>
+                                </div>
+                            ) 
+                        })
+                    }
                 </div>
             </div>
         ) : <p>Loading...</p>
