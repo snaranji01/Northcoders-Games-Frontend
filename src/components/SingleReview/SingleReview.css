@@ -31,9 +31,14 @@
 }
 
 .upvotes-container {
-    grid-area: upvotes;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-    
+    grid-area: upvotes;
+}
+.review-upvotes {
+    margin-left: 1vw;
 }
 
 .single-review-image-container{
