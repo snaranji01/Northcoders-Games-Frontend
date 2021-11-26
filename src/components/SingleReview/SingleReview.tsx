@@ -45,7 +45,7 @@ const SingleReview = () => {
                 setIsLoading(false)
             })
 
-    }, [])
+    }, [review_id])
 
     return (
         !isLoading ? (
