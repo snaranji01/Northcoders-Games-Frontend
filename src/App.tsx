@@ -7,6 +7,7 @@ import ListReviews from './components/ListReviews/ListReviews';
 import Navbar from './components/Navbar/Navbar';
 import SingleReview from './components/SingleReview/SingleReview';
 import { UserContext } from './contexts/User';
+import ChooseUser from './components/ChooseUser/ChooseUser';
 
 export interface singleReviewObj {
   review_id: number;
