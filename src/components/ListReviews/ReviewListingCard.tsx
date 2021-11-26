@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { singleReviewObj } from "../../App";
+import { FormatCategoriesRefObj, SingleReviewObj } from '../../types/types';
 
 
 interface IProps {
-    reviewData: singleReviewObj;
+    reviewData: SingleReviewObj;
 }
 const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
     const {
@@ -28,9 +28,6 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         return first30Words.join(" ");
     }
 
-    interface FormatCategoriesRefObj {
-        [backendName: string]: string
-    }
 
     const formatCategoriesRefObj: FormatCategoriesRefObj = {
         "strategy": "Strategy",

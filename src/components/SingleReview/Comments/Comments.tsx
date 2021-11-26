@@ -1,24 +1,17 @@
 import { useContext, useEffect, useState } from "react"
 import { GoArrowUp } from 'react-icons/go';
 
-import { getReviewCommentsById, postReviewComment } from "../../../api"
-import { singleReviewObj } from "../../../App";
-import { UserContext } from "../../../contexts/User";
-
 import './Comments.css';
+
+import { getReviewCommentsById, postReviewComment } from "../../../api"
+
+import { ReviewCommentObj, SingleReviewObj } from "../../../types/types";
+
+import { UserContext } from "../../../contexts/User";
 
 interface IProps {
     review_id: string | undefined;
-    singleReviewData: singleReviewObj;
-}
-
-interface ReviewCommentObj {
-    comment_id: number;
-    author: string;
-    comment_votes: 0;
-    body: string;
-    review_id: number;
-    created_at: string;
+    singleReviewData: SingleReviewObj;
 }
 
 const Comments: React.FC<IProps> = ({ review_id }) => {
@@ -107,16 +100,19 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
                                 <form>
                                     {
                                         sortCommentOptions.map(sortCommentOption => {
-                                            <div className="comment-sort-option">
-                                                <label htmlFor={`sort-by-${sortCommentOption.keyName}`}>{sortCommentOption.displayName}</label>
-                                                <input
-                                                    type="radio"
-                                                    name="sort-comments-option"
-                                                    id={`sort-by-${sortCommentOption.keyName}`}
-                                                    value={sortCommentOption.keyName}
+
+                                            return (
+                                                <div className="comment-sort-option">
+                                                    <label htmlFor={`sort-by-${sortCommentOption.keyName}`}>{sortCommentOption.displayName}</label>
+                                                    <input
+                                                        type="radio"
+                                                        name="sort-comments-option"
+                                                        id={`sort-by-${sortCommentOption.keyName}`}
+                                                        value={sortCommentOption.keyName}
                                                     // onClick={sortCommentsHandler}
-                                                />
-                                            </div>
+                                                    />
+                                                </div>
+                                            )
                                         })
                                     }
 

@@ -1,37 +1,19 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { getCategories } from './api';
+
 import './App.css';
-import ChooseUser, { User } from './components/ChooseUser/ChooseUser';
-import ListReviews from './components/ListReviews/ListReviews';
+
+import { getCategories } from './api';
+
+import { IFilterParams, resCategory, User } from './types/types';
+
 import Navbar from './components/Navbar/Navbar';
+import ListReviews from './components/ListReviews/ListReviews';
 import SingleReview from './components/SingleReview/SingleReview';
-import { UserContext } from './contexts/User';
 import ChooseUser from './components/ChooseUser/ChooseUser';
 
-export interface singleReviewObj {
-  review_id: number;
-  title: string;
-  owner: string;
-  category: string;
-  review_body: string;
-  designer: string;
-  review_img_url: string;
-  created_at: string;
-  review_votes: number;
-  comment_count: number;
-}
+import { UserContext } from './contexts/User';
 
-interface resCategory {
-  slug: string;
-  description: string;
-}
-
-export interface IFilterParams {
-  category: string;
-  sortBy: string;
-  order: string;
-}
 const App = () => {
   const [allCategories, setAllCategories] = useState<string[]>([]);
   const [filterParams, setFilterParams] = useState<IFilterParams>({

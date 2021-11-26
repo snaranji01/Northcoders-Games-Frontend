@@ -1,8 +1,12 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
-import { IFilterParams, singleReviewObj } from "../../App";
-import ReviewListingCard from "./ReviewListingCard";
+
 import "./ListReviews.css";
+
+import ReviewListingCard from "./ReviewListingCard";
+
 import { getReviews } from "../../api";
+
+import { FormatCategoriesRefObj, IFilterParams, SingleReviewObj } from "../../types/types";
 
 interface IProps {
     allCategories: string[];
@@ -11,11 +15,9 @@ interface IProps {
 }
 
 const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
-    // set review list data state
-    const [reviewListData, setReviewListData] = useState<singleReviewObj[]>([]);
+    const [reviewListData, setReviewListData] = useState<SingleReviewObj[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    //fetch review list data based on if search parameters have been provided
     useEffect(() => {
         setIsLoading(true);
         getReviews(filterParams)
@@ -27,14 +29,8 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
     }, [filterParams])
 
 
-    // sort-filter-panel
+// sort-filter-panel
     // 1) category
-
-
-    interface FormatCategoriesRefObj {
-        [backendName: string]: string
-    }
-
     const formatCategoriesRefObj: FormatCategoriesRefObj = {
         "strategy": "Strategy",
         "hidden-roles": "Hidden Roles",
@@ -163,7 +159,7 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
                                     })
                                 }
                             </div>
-                        ) : <p style={{ minWidth: "2000px" }}>Loading...</p>
+                        ) : <p>Loading...</p>
                     }
 
                 </div>

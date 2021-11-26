@@ -1,18 +1,16 @@
 import { Dispatch, SetStateAction, useContext } from "react";
 import { Link } from "react-router-dom";
-import { IFilterParams } from "../../App";
-import { UserContext } from "../../contexts/User";
+
 import './Navbar.css';
 
+import { FormatCategoriesRefObj, IFilterParams } from "../../types/types";
+
+import { UserContext } from "../../contexts/User";
 
 interface IProps {
     allCategories: string[];
     filterParams: IFilterParams;
     setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
-}
-
-interface FormatCategoriesRefObj {
-    [backendName: string]: string
 }
 
 const formatCategoriesRefObj: FormatCategoriesRefObj = {

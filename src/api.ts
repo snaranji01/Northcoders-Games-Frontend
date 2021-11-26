@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { IFilterParams } from './App';
+import { IFilterParams } from './types/types';
+
 
 const ncgamesAPI: AxiosInstance = axios.create({
     baseURL: "https://nc-games-backend-snaranji01.herokuapp.com/api"

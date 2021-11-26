@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { GoArrowUp } from 'react-icons/go';
 
-import { getReviewById } from "../../api";
-import { singleReviewObj } from "../../App";
-import Comments from "./Comments/Comments";
-
 import './SingleReview.css';
+
+import { getReviewById } from "../../api";
+
+import { SingleReviewObj } from "../../types/types";
+
+import Comments from "./Comments/Comments";
 
 
 const SingleReview = () => {
@@ -25,7 +27,7 @@ const SingleReview = () => {
 
     const { review_id } = useParams();
 
-    const [singleReviewData, setSingleReviewData] = useState<singleReviewObj>({
+    const [singleReviewData, setSingleReviewData] = useState<SingleReviewObj>({
         review_id: 0,
         title: "",
         owner: "",

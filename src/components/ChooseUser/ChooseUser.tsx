@@ -1,14 +1,10 @@
 import { useContext, useEffect, useState } from "react"
+
 import { getUsers } from "../../api"
+
+import { User } from "../../types/types";
+
 import { UserContext } from "../../contexts/User";
-
-export interface User {
-    username: string;
-    name: string;
-    avatar_url: string;
-}
-
-// const chooseUserHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {}
 
 const ChooseUser = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
