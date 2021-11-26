@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { User } from "../components/ChooseUser";
 
 export const UserContext = createContext<any>({
     username: "cooljmessy",
