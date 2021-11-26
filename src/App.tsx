@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getCategories } from './api';
 import './App.css';
 import ChooseUser, { User } from './components/ChooseUser';
-import Homepage from './components/Homepage/Homepage';
 import ListReviews from './components/ListReviews/ListReviews';
 import Navbar from './components/Navbar/Navbar';
 import SingleReview from './components/SingleReview/SingleReview';
