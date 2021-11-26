@@ -18,10 +18,9 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
             month: dateObj.getMonth() + 1,
             day: dateObj.getDate(),
             hour: dateObj.getHours(),
-            minute: dateObj.getMinutes(),
-            second: dateObj.getSeconds()
+            minute: dateObj.getMinutes()
         }
-        return `${timeDateStr.day}/${timeDateStr.month}/${timeDateStr.year} ${timeDateStr.hour}:${timeDateStr.minute}:${timeDateStr.second}`
+        return `${timeDateStr.day}/${timeDateStr.month}/${timeDateStr.year} ${timeDateStr.hour}:${timeDateStr.minute}`
     }
 
     const formatReviewBody = (reviewBodyInput: string): string => {
@@ -34,7 +33,7 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         [backendName: string]: string
     }
 
-    const formatCategoriesRefObj: FormatCategoriesRefObj =  {
+    const formatCategoriesRefObj: FormatCategoriesRefObj = {
         "strategy": "Strategy",
         "hidden-roles": "Hidden Roles",
         "dexterity": "Dexterity",
@@ -43,23 +42,23 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
         "deck-building": "Deck Building",
         "engine-building": "Engine Building"
     };
-
+    
     return (
         <div className="review-listing-card">
-            <div className="review-listing-card-title">{title}</div>
-            <div className="review-listing-card-additional-info">
-                <p className="review-listing-card-author">Author: {owner}</p>
-                <p className="review-listing-card-category">Category: {formatCategoriesRefObj[category]}</p>
-                <p className="review-listing-card-createdat">Created at: {formatCreatedAt(created_at)}</p>
+            <h2 className="card-title">{title}</h2>
+            <div className="review-info1">
+                <p className="inner-review-info">Author: {owner}</p>
+                <p className="inner-review-info">Category: {formatCategoriesRefObj[category]}</p>
             </div>
-            <div className="review-listing-card-upvotes"><p>
-                Upvotes: {review_votes}</p>
-                <div className="upvote-button-box">
-                    <HiArrowUp />
-                </div>
+            <div className="review-info2">
+                <p className="inner-review-info">Created at: {formatCreatedAt(created_at)}</p>
+                <p className="inner-review-info">Review upvotes: {review_votes}</p>
             </div>
-            <img className="review-listing-card-image" src={review_img_url} alt="The game that was reviewed" />
-            <div className="review-listing-card-content-preview">
+            <div className="card-image-container">
+                 <img className="card-image" src={review_img_url} alt="The game that was reviewed" />
+            </div>
+           
+            <div className="card-content-preview">
                 <p>{formatReviewBody(review_body)}... <Link to={`/reviews/${review_id}`}>Read more</Link> </p>
             </div>
         </div>

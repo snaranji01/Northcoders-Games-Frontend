@@ -1,18 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 #navbar {
     display: flex;
     flex-direction: row;
     align-content: flex-start;
     height: 5vh;
+    margin-bottom: 5vh;
 }
 
 .navbar-item {
+    display: flex;
+    
     text-decoration: none;
-    margin-left: 10px;
+    font-size: 2vh;
+    color: black;
+
+    background: #db5e1a;
+    height: 2.5vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    min-width: 15vw;
+    justify-content: center;
+    align-items: center;
+
+    border-left: solid;
+    border-top: solid;
+    border-bottom: solid;
+    border-color: black;
 }
 
-.navbar-link-categories {
+@media (max-width: 700px) {
+    .navbar-item {
+        font-size: 3vw;
+        min-width: ;
+    }
+}
+
+.navbar-item:hover {
+    background: green;
+}
+
+#users-link {
+    border-right: solid;
+}
+
+.navbar-link-category {
+    text-align: center;
+
     text-decoration: none;
-    margin-left: 10px;
+    background-color: lightblue;
+    border-left: solid;
+    border-top: solid;
+    border-bottom: solid;
+    border-color: black;
+}
+.navbar-link-category-text {
+    color: black;
+    text-decoration: none;
+    font-size: 1vw;
+    width: 10vw;
+}
+#engine-building-category-text {
+    border-right: solid;
+}
+
+
+.navbar-link-category:hover {
+    background-color: green;
 }
 
 #current-user-icon {
@@ -32,13 +86,9 @@
     display: none;
     position: absolute;
     min-width: 150px;
+    margin-top: 10px;
 }
 
-.dropdown:hover .dropdown-content{
-    display: block;
+#dropdown-container:hover .dropdown-content{
+    display: flex;
 }
-
-.navbar-link-categories{
-    margin-top: -5px;
-}
-

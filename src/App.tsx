@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getCategories } from './api';
 import './App.css';
 import ChooseUser, { User } from './components/ChooseUser';
-import Homepage from './components/Homepage';
+import Homepage from './components/Homepage/Homepage';
 import ListReviews from './components/ListReviews/ListReviews';
 import Navbar from './components/Navbar/Navbar';
 import SingleReview from './components/SingleReview/SingleReview';
@@ -66,7 +66,11 @@ const App = () => {
           setFilterParams={setFilterParams} />
         <div id="App">
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<ListReviews
+                allCategories={allCategories}
+                filterParams={filterParams}
+                setFilterParams={setFilterParams}
+              />} />
             <Route path="/reviews" element={
               <ListReviews
                 allCategories={allCategories}
