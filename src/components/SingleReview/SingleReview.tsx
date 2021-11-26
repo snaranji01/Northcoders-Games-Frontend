@@ -10,21 +10,10 @@ import { SingleReviewObj } from "../../types/types";
 
 import Comments from "./Comments/Comments";
 
+import { formatCreatedAt } from "../../utils/utils";
+
 
 const SingleReview = () => {
-    //util
-    const formatCreatedAt = (serverResponseString: string): string => {
-        const dateObj = new Date(Date.parse(serverResponseString));
-        const timeDateStr = {
-            year: dateObj.getFullYear(),
-            month: dateObj.getMonth() + 1,
-            day: dateObj.getDate(),
-            hour: dateObj.getHours(),
-            minute: dateObj.getMinutes()
-        }
-        return `${timeDateStr.day}/${timeDateStr.month}/${timeDateStr.year} ${timeDateStr.hour}:${timeDateStr.minute}`
-    }
-
     const { review_id } = useParams();
 
     const [singleReviewData, setSingleReviewData] = useState<SingleReviewObj>({

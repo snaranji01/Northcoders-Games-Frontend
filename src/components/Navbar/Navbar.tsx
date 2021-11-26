@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 import './Navbar.css';
 
-import { FormatCategoriesRefObj, IFilterParams } from "../../types/types";
+import { formatCategoryNames } from "../../utils/utils";
+
+import { IFilterParams } from "../../types/types";
 
 import { UserContext } from "../../contexts/User";
 
@@ -12,16 +14,6 @@ interface IProps {
     filterParams: IFilterParams;
     setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
 }
-
-const formatCategoriesRefObj: FormatCategoriesRefObj = {
-    "strategy": "Strategy",
-    "hidden-roles": "Hidden Roles",
-    "dexterity": "Dexterity",
-    "push-your-luck": "Push Your Luck",
-    "roll-and-write": "Roll And Write",
-    "deck-building": "Deck Building",
-    "engine-building": "Engine Building"
-};
 
 const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
     const { currentUser } = useContext(UserContext);
@@ -43,7 +35,7 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
                                         <p
                                             className="navbar-link-category-text"
                                             onClick={() => setFilterParams(filterParams => ({ ...filterParams, category }))}
-                                        >{formatCategoriesRefObj[category]}
+                                        >{formatCategoryNames(category)}
                                         </p>
                                     </Link>
                                 )

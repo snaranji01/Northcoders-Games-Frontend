@@ -7,6 +7,8 @@ import { getReviewCommentsById, postReviewComment } from "../../../api"
 
 import { ReviewCommentObj, SingleReviewObj } from "../../../types/types";
 
+import { formatCreatedAtComment } from "../../../utils/utils";
+
 import { UserContext } from "../../../contexts/User";
 
 interface IProps {
@@ -16,19 +18,6 @@ interface IProps {
 
 const Comments: React.FC<IProps> = ({ review_id }) => {
     const { currentUser } = useContext(UserContext);
-
-    //util
-    const formatCreatedAtComment = (serverResponseString: string): string => {
-        const dateObj = new Date(Date.parse(serverResponseString));
-        const timeDateStr = {
-            year: dateObj.getFullYear(),
-            month: dateObj.getMonth() + 1,
-            day: dateObj.getDate(),
-            hour: dateObj.getHours(),
-            minute: dateObj.getMinutes()
-        }
-        return `${timeDateStr.day}/${timeDateStr.month}/${timeDateStr.year} ${timeDateStr.hour}:${timeDateStr.minute}`
-    }
 
     const [reviewComments, setReviewComments] = useState<ReviewCommentObj[]>([]);
     const [isLoadingComments, setIsLoadingComments] = useState<boolean>(false);
@@ -41,7 +30,6 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
             })
     }, [review_id]);
 
-    //set comment input text box value
     const [commentInputBoxValue, setCommentInputBoxValue] = useState<string>('');
     const onCommentInputTextChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCommentInputBoxValue((e.target as HTMLInputElement).value)

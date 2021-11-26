@@ -6,7 +6,8 @@ import ReviewListingCard from "./ReviewListingCard";
 
 import { getReviews } from "../../api";
 
-import { FormatCategoriesRefObj, IFilterParams, SingleReviewObj } from "../../types/types";
+import { IFilterParams, SingleReviewObj } from "../../types/types";
+import { formatCategoryNames } from "../../utils/utils";
 
 interface IProps {
     allCategories: string[];
@@ -31,16 +32,6 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
 
 // sort-filter-panel
     // 1) category
-    const formatCategoriesRefObj: FormatCategoriesRefObj = {
-        "strategy": "Strategy",
-        "hidden-roles": "Hidden Roles",
-        "dexterity": "Dexterity",
-        "push-your-luck": "Push Your Luck",
-        "roll-and-write": "Roll And Write",
-        "deck-building": "Deck Building",
-        "engine-building": "Engine Building"
-    };
-
     const setCategoryParamHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         const chosenCategory = (e.target as HTMLButtonElement).value
         setFilterParams(filterParams => ({ ...filterParams, category: chosenCategory }))
@@ -95,7 +86,7 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
                                     allCategories.map(category => {
                                         return (
                                             <div key={`radio-${category}-option`} className="sorting-panel-category">
-                                                <label htmlFor="category-choose-radio">{formatCategoriesRefObj[category]}</label>
+                                                <label htmlFor="category-choose-radio">{formatCategoryNames(category)}</label>
                                                 <input
                                                     type="radio"
                                                     id={`radio-${category}-option`} value={category}
@@ -161,11 +152,8 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
                             </div>
                         ) : <p>Loading...</p>
                     }
-
                 </div>
             </div>
-
-
         </div>
     )
 }
