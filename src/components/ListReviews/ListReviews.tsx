@@ -17,13 +17,6 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
 
     //fetch review list data based on if search parameters have been provided
     useEffect(() => {
-        if (reviewListData.length === 0) {
-            setFilterParams({
-                category: '',
-                sortBy: '',
-                order: ''
-            })
-        }
         getReviews(filterParams)
             .then(reviews => {
                 setReviewListData(reviews);
@@ -90,7 +83,6 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
         }
         
     }
-
 
     return (
         !isLoading ? (
