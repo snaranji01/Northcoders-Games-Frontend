@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getCategories } from './api';
 import './App.css';
-import ChooseUser, { User } from './components/ChooseUser';
+import ChooseUser, { User } from './components/ChooseUser/ChooseUser';
 import ListReviews from './components/ListReviews/ListReviews';
 import Navbar from './components/Navbar/Navbar';
 import SingleReview from './components/SingleReview/SingleReview';

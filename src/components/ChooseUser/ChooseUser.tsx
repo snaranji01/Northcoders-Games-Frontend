@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
-import { getUsers } from "../api"
-import { UserContext } from "../contexts/User";
+import { getUsers } from "../../api"
+import { UserContext } from "../../contexts/User";
 
 export interface User {
     username: string;
@@ -30,7 +30,7 @@ const ChooseUser = () => {
             <h1>Select a user:</h1>
             <div id="select-user-buttons">
                 {allUsers.map(user => {
-                    return <button className="select-user-button" value={user.username} onClick={handleChooseUserHandler}>
+                    return <button key={user.username} className="select-user-button" value={user.username} onClick={handleChooseUserHandler}>
                         {user.username}
                     </button>
                 })}
