@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getReviewById, getReviewCommentsById } from "../../api";
+import { getReviewById } from "../../api";
 import { singleReviewObj } from "../../App";
+import Comments from "./Comments";
 
-interface ReviewCommentObj {
-    comment_id: number;
-    author: string;
-    comment_votes: 0;
-    body: string;
-    review_id: number;
-    created_at: string;
-}
+import './SingleReview.css';
+
 
 const SingleReview = () => {
+    //util
+    const formatCreatedAt = (serverResponseString: string): string => {
+        const dateObj = new Date(Date.parse(serverResponseString));
+        const timeDateStr = {
+            year: dateObj.getFullYear(),
+            month: dateObj.getMonth() + 1,
+            day: dateObj.getDate(),
+            hour: dateObj.getHours(),
+            minute: dateObj.getMinutes()
+        }
+        return `${timeDateStr.day}/${timeDateStr.month}/${timeDateStr.year} ${timeDateStr.hour}:${timeDateStr.minute}`
+    }
+
     const { review_id } = useParams();
 
     const [singleReviewData, setSingleReviewData] = useState<singleReviewObj>({
@@ -28,65 +36,40 @@ const SingleReview = () => {
         comment_count: 0,
     });
 
-    const [reviewComments, setReviewComments] = useState<ReviewCommentObj[]>([]);
-
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
+        setIsLoading(true);
         getReviewById(review_id)
             .then(response => {
                 setSingleReviewData(response)
+                setIsLoading(false);
             })
-            .then(() => {
-                return getReviewCommentsById(review_id)
-            })
-            .then(response => {
-                setReviewComments(response)
-                setIsLoading(false)
-            })
-
     }, [review_id])
 
     return (
         !isLoading ? (
-            <div className="singleReviewPageContainer">
+            <div className="single-review-page-container">
                 <div className="article-content">
-                    <h2>{singleReviewData.title}</h2>
-                    <p>Author: {singleReviewData.owner}</p>
-                    <p>Categories: {singleReviewData.category}</p>
-                    <p>Designer: {singleReviewData.designer}</p>
-                    <p>Review Body: {singleReviewData.review_body}</p>
-                    <p>Created at: {singleReviewData.created_at}</p>
-                    <p>Review votes: {singleReviewData.review_votes}</p>
-                    <p>Comment count: {singleReviewData.comment_count}</p>
-                    <img src={singleReviewData.review_img_url} alt="The game being reviewed" />
+                    <h1 className="single-review-title">{singleReviewData.title}</h1>
+                    <div className="single-article-info-container">
+                        <p className="single-article-info">Author: {singleReviewData.owner}</p>
+                        <p className="single-article-info">Category: {singleReviewData.category}</p>
+                        <p className="single-article-info">Designer: {singleReviewData.designer}</p>
+                        <p className="single-article-info">Created at: {formatCreatedAt(singleReviewData.created_at)}</p>
+                    </div>
+                    <div className="upvotes-container">
+                        <p>Review votes: {singleReviewData.review_votes}</p>
+                    </div>
+                    <div className="article-review-body-container">
+                        <p className="review-body">{singleReviewData.review_body}</p>
+                    </div>
+                    <div className="single-review-image-container">
+                        <img className="single-review-image" src={singleReviewData.review_img_url} alt="The game being reviewed" />
+                    </div>
                 </div>
-                <div className="comment-section">
-                    <h2>Comments</h2>
-                    <div className="add-comment">
-                        <form>
-                            <label htmlFor="add-comment-input">Add a comment: </label>
-                            <input type="text" name="add-comment-input" id="add-comment-input" />
-                            <button>Post comment</button>
-                        </form>
-
-                    </div>
-                    <div className="comments-list">
-                        {
-                            reviewComments.map(reviewComment => {
-                                return (
-                                    <div className="review-comment">
-                                        <p>{reviewComment.author}</p>
-                                        <p>{reviewComment.created_at}</p>
-                                        <p>{reviewComment.body}</p>
-                                        <p>{reviewComment.comment_votes}</p>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-
+                <div className="comments-section">
+                    <Comments review_id={review_id} singleReviewData={singleReviewData} />
                 </div>
             </div>
         ) : <p>Loading...</p>
