@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { GoArrowUp } from 'react-icons/go';
+
 import { getReviewById } from "../../api";
 import { singleReviewObj } from "../../App";
-import Comments from "./Comments";
+import Comments from "./Comments/Comments";
 
 import './SingleReview.css';
 
@@ -59,7 +61,8 @@ const SingleReview = () => {
                         <p className="single-article-info">Created at: {formatCreatedAt(singleReviewData.created_at)}</p>
                     </div>
                     <div className="upvotes-container">
-                        <p>Review votes: {singleReviewData.review_votes}</p>
+                        <p className="review-upvotes">Review votes: {singleReviewData.review_votes}</p>
+                        <p className="review-upvotes">< GoArrowUp /></p>
                     </div>
                     <div className="article-review-body-container">
                         <p className="review-body">{singleReviewData.review_body}</p>
