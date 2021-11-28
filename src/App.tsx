@@ -8,7 +8,7 @@ import { getCategories } from './api';
 import { IFilterParams, AllCategoriesResponseObj, User } from './types/types';
 
 import Navbar from './components/Navbar/Navbar';
-import ListReviews from './components/ListReviews/ListReviews';
+import ReviewsList from './components/ReviewsList/ReviewsList';
 import SingleReview from './components/SingleReview/SingleReview';
 import ChooseUser from './components/ChooseUser/ChooseUser';
 
@@ -48,13 +48,13 @@ const App = () => {
           setFilterParams={setFilterParams} />
         <div id="App">
           <Routes>
-            <Route path="/" element={<ListReviews
+            <Route path="/" element={<ReviewsList
                 allCategories={allCategories}
                 filterParams={filterParams}
                 setFilterParams={setFilterParams}
               />} />
             <Route path="/reviews" element={
-              <ListReviews
+              <ReviewsList
                 allCategories={allCategories}
                 filterParams={filterParams}
                 setFilterParams={setFilterParams}

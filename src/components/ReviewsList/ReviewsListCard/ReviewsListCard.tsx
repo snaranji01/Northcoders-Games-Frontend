@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 
-import { SingleReviewObj } from '../../types/types';
+import { SingleReviewObj } from '../../../types/types';
 
-import { formatCategoryNames, formatCreatedAt, formatReviewBodyPreview } from '../../utils/utils';
+import './ReviewsListCard.css';
+
+import { formatCategoryNames, formatCreatedAt, formatReviewBodyPreview } from '../../../utils/utils';
 
 
 interface IProps {
     reviewData: SingleReviewObj;
 }
-const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
+const ReviewsListCard: React.FC<IProps> = ({ reviewData }) => {
     const {
         review_id, title, owner, review_img_url, category, created_at, review_votes, review_body,
     } = reviewData;
@@ -37,4 +39,4 @@ const ReviewListingCard: React.FC<IProps> = ({ reviewData }) => {
     )
 }
 
-export default ReviewListingCard;
+export default ReviewsListCard;

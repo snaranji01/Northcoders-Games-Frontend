@@ -1,0 +1,80 @@
+/* card: grid template definition */
+.review-listing-card {
+    display: grid;
+
+    padding: 1vw;
+    margin-bottom: 1vh;
+
+    border-style: solid;
+
+    grid-template-areas:
+        "title title title"
+        "info1 info1 info1"
+        "info2 info2 info2"
+        "image image content"
+        "image image content"
+}
+
+.card-title {
+    grid-area: title;
+
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
+    font-size: 4vw;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.review-info1 {
+    grid-area: info1;
+
+    font-size: 2.5vw;
+
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+}
+
+.review-info2 {
+    grid-area: info2;
+
+    font-size: 2.5vw;
+
+    text-align: center;
+}
+
+.inner-review-info {
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    margin-left: 2vw;
+}
+
+.card-image-container {
+    grid-area: image;
+
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content-preview {
+    font-size: 2vw;
+    padding: 2vw;
+
+
+    grid-area: content;
+}

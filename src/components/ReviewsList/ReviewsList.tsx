@@ -1,8 +1,8 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
-import "./ListReviews.css";
+import "./ReviewsList.css";
 
-import ReviewListingCard from "./ReviewListingCard";
+import ReviewsListCard from "./ReviewsListCard/ReviewsListCard";
 
 import { getReviews } from "../../api";
 
@@ -15,7 +15,7 @@ interface IProps {
     setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
 }
 
-const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
+const ReviewsList: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
     const [reviewListData, setReviewListData] = useState<SingleReviewObj[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -146,7 +146,7 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
                             <div id="list-review-cards-container">
                                 {
                                     reviewListData.map(reviewData => {
-                                        return <ReviewListingCard key={reviewData.review_id} reviewData={reviewData} />
+                                        return <ReviewsListCard key={reviewData.review_id} reviewData={reviewData} />
                                     })
                                 }
                             </div>
@@ -158,4 +158,4 @@ const ListReviews: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
     )
 }
 
-export default ListReviews;
+export default ReviewsList;
