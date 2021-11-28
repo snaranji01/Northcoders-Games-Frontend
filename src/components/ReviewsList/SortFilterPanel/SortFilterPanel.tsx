@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { IFilterParams } from "../../../types/types";
+import { FilterParams } from "../../../types/types";
 import { formatCategoryNames } from "../../../utils/utils";
 import { setCategoryParamHandler, setOrderParamHandler, setSortByParamHandler } from "./eventHandlers";
 import './SortFilterPanel.css';
 
 interface IProps {
-    filterParams: IFilterParams;
-    setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
+    filterParams: FilterParams;
+    setFilterParams: Dispatch<SetStateAction<FilterParams>>;
     allCategories: string[];
 }
 

@@ -5,14 +5,14 @@ import './Navbar.css';
 
 import { formatCategoryNames } from "../../utils/utils";
 
-import { IFilterParams } from "../../types/types";
+import { FilterParams } from "../../types/types";
 
 import { UserContext } from "../../contexts/User";
 
 interface IProps {
     allCategories: string[];
-    filterParams: IFilterParams;
-    setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
+    filterParams: FilterParams;
+    setFilterParams: Dispatch<SetStateAction<FilterParams>>;
 }
 
 const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {

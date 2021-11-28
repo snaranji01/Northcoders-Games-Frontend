@@ -26,7 +26,7 @@ export interface AllCategoriesResponseObj {
     description: string;
 }
 
-export interface IFilterParams {
+export interface FilterParams {
     category: string;
     sortBy: string;
     order: string;

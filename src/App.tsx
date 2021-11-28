@@ -5,7 +5,7 @@ import './App.css';
 
 import { getCategories } from './api';
 
-import { IFilterParams, AllCategoriesResponseObj, User } from './types/types';
+import { FilterParams, AllCategoriesResponseObj, User } from './types/types';
 
 import Navbar from './components/Navbar/Navbar';
 import ReviewsList from './components/ReviewsList/ReviewsList';
@@ -16,7 +16,7 @@ import { UserContext } from './contexts/User';
 
 const App = () => {
   const [allCategories, setAllCategories] = useState<string[]>([]);
-  const [filterParams, setFilterParams] = useState<IFilterParams>({
+  const [filterParams, setFilterParams] = useState<FilterParams>({
     category: '',
     sortBy: '',
     order: ''

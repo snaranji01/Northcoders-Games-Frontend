@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { AllCategoriesResponseObj, IFilterParams, SingleCommentObj, SingleReviewObj, User } from './types/types';
+import { AllCategoriesResponseObj, FilterParams, SingleCommentObj, SingleReviewObj, User } from './types/types';
 
 
 const ncgamesAPI: AxiosInstance = axios.create({
     baseURL: "https://nc-games-backend-snaranji01.herokuapp.com/api"
 });
 
-export const getReviews = (filterParams: IFilterParams): Promise<SingleReviewObj[]> => {
+export const getReviews = (filterParams: FilterParams): Promise<SingleReviewObj[]> => {
 
     const params = {
         sort_by: filterParams.sortBy,

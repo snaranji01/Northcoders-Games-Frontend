@@ -4,15 +4,15 @@ import "./ReviewsList.css";
 
 import { getReviews } from "../../api";
 
-import { IFilterParams, SingleReviewObj } from "../../types/types";
+import { FilterParams, SingleReviewObj } from "../../types/types";
 
 import ReviewsListCard from "./ReviewsListCard/ReviewsListCard";
 import SortFilterPanel from "./SortFilterPanel/SortFilterPanel";
 
 interface IProps {
     allCategories: string[];
-    filterParams: IFilterParams;
-    setFilterParams: Dispatch<SetStateAction<IFilterParams>>;
+    filterParams: FilterParams;
+    setFilterParams: Dispatch<SetStateAction<FilterParams>>;
 }
 
 const ReviewsList: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
