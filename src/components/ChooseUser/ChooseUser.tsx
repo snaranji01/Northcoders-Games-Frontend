@@ -9,30 +9,37 @@ import { UserContext } from "../../contexts/User";
 const ChooseUser = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
 
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
     const { currentUser, setCurrentUser } = useContext(UserContext);
 
     useEffect(() => {
-        getUsers().then(response => setAllUsers(response))
+        getUsers().then(response => {
+            setAllUsers(response)
+            setIsLoading(false)
+        })
     }, [currentUser])
 
     const handleChooseUserHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const chosenUserButton = (e.target as HTMLButtonElement).value;
-        const [ chosenUser ] = allUsers.filter(existingUser => existingUser.username === chosenUserButton );
+        const [chosenUser] = allUsers.filter(existingUser => existingUser.username === chosenUserButton);
         setCurrentUser(chosenUser);
     }
 
     return (
-        <div className="select-user-page">
-            <h1>Select a user:</h1>
-            <div id="select-user-buttons">
-                {allUsers.map(user => {
-                    return <button key={user.username} className="select-user-button" value={user.username} onClick={handleChooseUserHandler}>
-                        {user.username}
-                    </button>
-                })}
-            </div>
-        </div>
-
+        isLoading ? <p>Loading...</p>
+            : (
+                <div className="select-user-page">
+                    <h1>Select a user:</h1>
+                    <div id="select-user-buttons">
+                        {allUsers.map(user => {
+                            return <button key={user.username} className="select-user-button" value={user.username} onClick={handleChooseUserHandler}>
+                                {user.username}
+                            </button>
+                        })}
+                    </div>
+                </div>
+            )
     )
 }
 
