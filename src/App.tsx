@@ -5,7 +5,7 @@ import './App.css';
 
 import { getCategories } from './api';
 
-import { IFilterParams, resCategory, User } from './types/types';
+import { IFilterParams, AllCategoriesResponseObj, User } from './types/types';
 
 import Navbar from './components/Navbar/Navbar';
 import ListReviews from './components/ListReviews/ListReviews';
@@ -32,7 +32,7 @@ const App = () => {
   useEffect(() => {
     getCategories()
       .then(resCategories => {
-        const categoriesArray = resCategories.map((category: resCategory): string => category.slug);
+        const categoriesArray = resCategories.map((category: AllCategoriesResponseObj): string => category.slug);
         setAllCategories(categoriesArray);
       })
   }, [])

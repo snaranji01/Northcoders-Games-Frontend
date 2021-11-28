@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { IFilterParams } from './types/types';
+import { AllCategoriesResponseObj, IFilterParams, SingleCommentObj, SingleReviewObj, User } from './types/types';
 
 
 const ncgamesAPI: AxiosInstance = axios.create({
     baseURL: "https://nc-games-backend-snaranji01.herokuapp.com/api"
 });
 
-export const getReviews = (filterParams: IFilterParams) => {
+export const getReviews = (filterParams: IFilterParams): Promise<SingleReviewObj[]> => {
 
     const params = {
         sort_by: filterParams.sortBy,
@@ -21,26 +21,28 @@ export const getReviews = (filterParams: IFilterParams) => {
         })
 }
 
-export const getReviewById = (review_id: string | undefined) => {
+export const getReviewById = (review_id: string | undefined): Promise<SingleReviewObj> => {
     return ncgamesAPI
         .get(`/reviews/${review_id}`)
         .then(response => response.data.review)
 }
 
-export const getReviewCommentsById = (review_id: string | undefined) => {
+export const getReviewCommentsById = (review_id: string | undefined): Promise<SingleCommentObj[]> => {
     return ncgamesAPI
         .get(`/reviews/${review_id}/comments`)
         .then(response => response.data.reviewComments)
 }
 
-export const postReviewComment = (review_id: string | undefined, username: string, body: string) => {
-    const postBody = {username, body};
+export const postReviewComment = (
+    review_id: string | undefined, username: string, body: string
+    ): Promise<SingleCommentObj> => {
+    const postBody = { username, body };
     return ncgamesAPI
         .post(`reviews/${review_id}/comments`, postBody)
         .then(response => response.data.newReviewComment)
 }
 
-export const getCategories = () => {
+export const getCategories = () : Promise<AllCategoriesResponseObj[]> => {
     return ncgamesAPI
         .get('/categories')
         .then(response => {
@@ -48,7 +50,7 @@ export const getCategories = () => {
         })
 }
 
-export const getUsers = () => {
+export const getUsers = () : Promise<User[]> => {
     return ncgamesAPI
         .get('/users')
         .then(response => {
@@ -56,7 +58,7 @@ export const getUsers = () => {
         })
 }
 
-export const getUserByUsername = (username: string) => {
+export const getUserByUsername = (username: string): Promise<User> => {
     return ncgamesAPI
         .get(`/users/${username}`)
         .then(response => {

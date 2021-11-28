@@ -21,7 +21,7 @@ export interface SingleReviewObj {
     comment_count: number;
 }
 
-export interface resCategory {
+export interface AllCategoriesResponseObj {
     slug: string;
     description: string;
 }
@@ -32,7 +32,7 @@ export interface IFilterParams {
     order: string;
 }
 
-export interface ReviewCommentObj {
+export interface SingleCommentObj {
     comment_id: number;
     author: string;
     comment_votes: number;

@@ -5,7 +5,7 @@ import './Comments.css';
 
 import { getReviewCommentsById, postReviewComment } from "../../../api"
 
-import { ReviewCommentObj, SingleReviewObj } from "../../../types/types";
+import { SingleCommentObj, SingleReviewObj } from "../../../types/types";
 
 import { formatCreatedAtComment } from "../../../utils/utils";
 
@@ -19,7 +19,7 @@ interface IProps {
 const Comments: React.FC<IProps> = ({ review_id }) => {
     const { currentUser } = useContext(UserContext);
 
-    const [reviewComments, setReviewComments] = useState<ReviewCommentObj[]>([]);
+    const [reviewComments, setReviewComments] = useState<SingleCommentObj[]>([]);
     const [isLoadingComments, setIsLoadingComments] = useState<boolean>(false);
     useEffect(() => {
         setIsLoadingComments(true);
