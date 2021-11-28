@@ -14,3 +14,13 @@ export const setOrderParamHandler = (e: React.MouseEvent<HTMLInputElement, Mouse
     const chosenOrder = (e.target as HTMLButtonElement).value
     setFilterParams(filterParams => ({ ...filterParams, order: chosenOrder }))
 }
+
+export const toggleSortFilterPanelHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, toggleSortFilterPanel: boolean, setToggleSortFilterPanel: Dispatch<SetStateAction<boolean>>) => {
+    setToggleSortFilterPanel(toggleSortFilterPanel => !toggleSortFilterPanel);
+    const currentText = (e.target as HTMLButtonElement).textContent;
+    if (currentText === "Click to sort and filter") {
+        (e.target as HTMLButtonElement).textContent = "Click to minimise"
+    } else {
+        (e.target as HTMLButtonElement).textContent = "Click to sort and filter"
+    }
+};

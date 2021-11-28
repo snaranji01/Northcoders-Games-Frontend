@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { FilterParams } from "../../../types/types";
 import { formatCategoryNames } from "../../../utils/utils";
-import { setCategoryParamHandler, setOrderParamHandler, setSortByParamHandler } from "./eventHandlers";
+import { setCategoryParamHandler, setOrderParamHandler, setSortByParamHandler, toggleSortFilterPanelHandler } from "./eventHandlers";
 import './SortFilterPanel.css';
 
 interface IProps {
@@ -26,19 +26,10 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allC
 
     // toggle sort-filter-panel
     const [toggleSortFilterPanel, setToggleSortFilterPanel] = useState<boolean>(false);
-    const ToggleSortFilterPanelHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        setToggleSortFilterPanel(toggleSortFilterPanel => !toggleSortFilterPanel);
-        const currentText = (e.target as HTMLButtonElement).textContent;
-        if (currentText === "Click to sort and filter") {
-            (e.target as HTMLButtonElement).textContent = "Click to minimise"
-        } else {
-            (e.target as HTMLButtonElement).textContent = "Click to sort and filter"
-        }
-    }
 
     return (
         < div className="sort-filter-panel" >
-            <button onClick={ToggleSortFilterPanelHandler} className="toggleSortFilterPanel">
+            <button onClick={e => toggleSortFilterPanelHandler(e, toggleSortFilterPanel, setToggleSortFilterPanel)} className="toggleSortFilterPanel">
                 {'Click to sort and filter'}
             </button>
             {
