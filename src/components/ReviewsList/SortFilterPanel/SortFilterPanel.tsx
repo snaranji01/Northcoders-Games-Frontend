@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { IFilterParams } from "../../../types/types";
 import { formatCategoryNames } from "../../../utils/utils";
+import { setCategoryParamHandler, setOrderParamHandler, setSortByParamHandler } from "./eventHandlers";
 import './SortFilterPanel.css';
 
 interface IProps {
@@ -10,13 +11,6 @@ interface IProps {
 }
 
 const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allCategories }) => {
-    // sort-filter-panel
-    // 1) category
-    const setCategoryParamHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        const chosenCategory = (e.target as HTMLButtonElement).value
-        setFilterParams(filterParams => ({ ...filterParams, category: chosenCategory }))
-    }
-    // 2) sort-by
     const allSortBy = [
         { backendName: "title", frontendName: "Title" },
         { backendName: "owner", frontendName: "Author" },
@@ -25,19 +19,10 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allC
         { backendName: "review_votes", frontendName: "Upvotes" },
     ]
 
-    const setSortByParamHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        const chosenSortBy = (e.target as HTMLButtonElement).value
-        setFilterParams(filterParams => ({ ...filterParams, sortBy: chosenSortBy }))
-    }
-    // 3) order
     const allOrder = [
         { backendName: "asc", frontendName: "Ascending" },
         { backendName: "desc", frontendName: "Descending" }
     ];
-    const setOrderParamHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        const chosenOrder = (e.target as HTMLButtonElement).value
-        setFilterParams(filterParams => ({ ...filterParams, order: chosenOrder }))
-    }
 
     // toggle sort-filter-panel
     const [toggleSortFilterPanel, setToggleSortFilterPanel] = useState<boolean>(false);
@@ -70,7 +55,7 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allC
                                                 type="radio"
                                                 id={`radio-${category}-option`} value={category}
                                                 name="choose-category-option"
-                                                onClick={setCategoryParamHandler}
+                                                onClick={e => setCategoryParamHandler(e, filterParams, setFilterParams)}
                                             />
                                         </div>
                                     )
@@ -88,7 +73,7 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allC
                                                 type="radio"
                                                 id={`radio-${sortby.backendName}-option`} value={sortby.backendName}
                                                 name="choose-sortby-option"
-                                                onClick={setSortByParamHandler}
+                                                onClick={e => setSortByParamHandler(e, filterParams, setFilterParams)}
                                             />
                                         </div>
                                     )
@@ -106,7 +91,7 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams, allC
                                                 type="radio"
                                                 id={`radio-${order}-option`} value={order.backendName}
                                                 name="choose-order-option"
-                                                onClick={setOrderParamHandler}
+                                                onClick={e => setOrderParamHandler(e, filterParams, setFilterParams)}
                                             />
                                         </div>
                                     )
