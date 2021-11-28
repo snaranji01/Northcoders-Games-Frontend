@@ -1,0 +1,6 @@
+/* set fixed width of sort and filter form */
+.sort-filter-panel {
+    min-width: 160px;
+    margin-right: 1vw;
+    margin-top: 25vh;
+}
