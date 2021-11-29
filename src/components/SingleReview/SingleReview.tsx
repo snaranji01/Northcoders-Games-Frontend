@@ -14,20 +14,14 @@ import { formatCreatedAt } from "../../utils/utils";
 
 
 const SingleReview = () => {
-    const { review_id } = useParams();
+    const { review_id: reviewIdReceived } = useParams();
+    let review_id: string;
+    if(reviewIdReceived === undefined) {
+        // currently redirects to main reviews page. Need to add error handling here.
+        review_id='';
+    } else review_id = reviewIdReceived;
 
-    const [singleReviewData, setSingleReviewData] = useState<SingleReviewObj>({
-        review_id: 0,
-        title: "",
-        owner: "",
-        category: "",
-        designer: "",
-        review_img_url: "",
-        review_body: "",
-        created_at: "",
-        review_votes: 0,
-        comment_count: 0,
-    });
+    const [singleReviewData, setSingleReviewData] = useState<SingleReviewObj | null>(null);
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -42,7 +36,8 @@ const SingleReview = () => {
 
     return (
         !isLoading ? (
-            <div className="single-review-page-container">
+            (singleReviewData !== null) ? (
+               <div className="single-review-page-container">
                 <div className="article-content">
                     <h1 className="single-review-title">{singleReviewData.title}</h1>
                     <div className="single-article-info-container">
@@ -65,7 +60,9 @@ const SingleReview = () => {
                 <div className="comments-section">
                     <Comments review_id={review_id} singleReviewData={singleReviewData} />
                 </div>
-            </div>
+            </div> 
+            ) : null
+            
         ) : <p>Loading...</p>
     )
 }

@@ -21,20 +21,20 @@ export const getReviews = (filterParams: FilterParams): Promise<SingleReviewObj[
         })
 }
 
-export const getReviewById = (review_id: string | undefined): Promise<SingleReviewObj> => {
+export const getReviewById = (review_id: string): Promise<SingleReviewObj> => {
     return ncgamesAPI
         .get(`/reviews/${review_id}`)
         .then(response => response.data.review)
 }
 
-export const getReviewCommentsById = (review_id: string | undefined): Promise<SingleCommentObj[]> => {
+export const getReviewCommentsById = (review_id: string): Promise<SingleCommentObj[]> => {
     return ncgamesAPI
         .get(`/reviews/${review_id}/comments`)
         .then(response => response.data.reviewComments)
 }
 
 export const postReviewComment = (
-    review_id: string | undefined, username: string, body: string
+    review_id: string, username: string, body: string
     ): Promise<SingleCommentObj> => {
     const postBody = { username, body };
     return ncgamesAPI

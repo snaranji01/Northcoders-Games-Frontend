@@ -12,7 +12,7 @@ import { formatCreatedAtComment } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
 
 interface IProps {
-    review_id: string | undefined;
+    review_id: string;
     singleReviewData: SingleReviewObj;
 }
 
@@ -39,15 +39,23 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
         e.preventDefault();
 
         postReviewComment(review_id, currentUser.username, commentInputBoxValue)
-            .then((response) => {
+            .then(() => {
                 setReviewComments(reviewComments => {
-                    const reviewCommentsCopy = JSON.parse(JSON.stringify(reviewComments));
-                    reviewCommentsCopy.push(response);
+                    const reviewCommentsCopy: SingleCommentObj[] = JSON.parse(JSON.stringify(reviewComments));
+                    const latestCommentId = Math.max(...reviewCommentsCopy.map((reviewComment: SingleCommentObj) => reviewComment.comment_id))
+                    reviewCommentsCopy.push({
+                        comment_id: latestCommentId,
+                        author: currentUser.username,
+                        comment_votes: 0,
+                        body: "",
+                        review_id: parseInt(review_id),
+                        created_at: new Date().toString() 
+                    })
                     return reviewCommentsCopy
                 })
             })
             .catch(error => {
-                console.log(error)
+                console.log(error)                
             })
     }
 
