@@ -33,6 +33,7 @@ export interface FilterParams {
 }
 
 export interface SingleCommentObj {
+    [index: string]: number | string;
     comment_id: number;
     author: string;
     comment_votes: number;
