@@ -8,6 +8,8 @@ import { FilterParams, SingleReviewObj } from "../../types/types";
 
 import ReviewsListCard from "./ReviewsListCard/ReviewsListCard";
 import SortFilterPanel from "./SortFilterPanel/SortFilterPanel";
+import { AxiosError } from "axios";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps {
     allCategories: string[];
@@ -18,6 +20,7 @@ interface IProps {
 const ReviewsList: React.FC<IProps> = ({ allCategories, filterParams, setFilterParams }) => {
     const [reviewListData, setReviewListData] = useState<SingleReviewObj[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [error, setError] = useState<AxiosError | Error | null>(null);
 
     useEffect(() => {
         setIsLoading(true);
@@ -26,8 +29,13 @@ const ReviewsList: React.FC<IProps> = ({ allCategories, filterParams, setFilterP
                 setReviewListData(reviews);
                 setIsLoading(false);
             })
-            .catch(console.log)
+            .catch(error => {
+               setError(error);
+            })
     }, [filterParams])
+
+    
+    if(error) return <ErrorPage error={error} />
     return (
         <div className="list-reviews-page-container">
             <SortFilterPanel filterParams={filterParams} setFilterParams={setFilterParams} allCategories={allCategories} />

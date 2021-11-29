@@ -10,6 +10,8 @@ import { SingleCommentObj, SingleReviewObj } from "../../../types/types";
 import { formatCreatedAtComment } from "../../../utils/utils";
 
 import { UserContext } from "../../../contexts/User";
+import { AxiosError } from "axios";
+import ErrorPage from "../../ErrorPage/ErrorPage";
 
 interface IProps {
     review_id: string;
@@ -21,12 +23,18 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
 
     const [reviewComments, setReviewComments] = useState<SingleCommentObj[]>([]);
     const [isLoadingComments, setIsLoadingComments] = useState<boolean>(false);
+
+    const [error, setError] = useState<AxiosError | Error | null>(null);
+
     useEffect(() => {
         setIsLoadingComments(true);
         getReviewCommentsById(review_id)
             .then(response => {
                 setReviewComments(response);
                 setIsLoadingComments(false);
+            })
+            .catch(error => {
+                setError(error)
             })
     }, [review_id]);
 
@@ -55,7 +63,8 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
                 })
             })
             .catch(error => {
-                console.log(error)                
+                console.log(error)
+                setError(error);                
             })
     }
 
@@ -79,6 +88,8 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
             return sortedComments;
         })
     }
+
+    if(error) return <ErrorPage error={error} />
     return (
         <>
             <h2>Comments</h2>

@@ -13,6 +13,8 @@ import SingleReview from './components/SingleReview/SingleReview';
 import ChooseUser from './components/ChooseUser/ChooseUser';
 
 import { UserContext } from './contexts/User';
+import ErrorPage from './components/ErrorPage/ErrorPage';
+import { AxiosError } from 'axios';
 
 const App = () => {
   const [allCategories, setAllCategories] = useState<string[]>([]);
@@ -21,6 +23,9 @@ const App = () => {
     sortBy: '',
     order: ''
   });
+
+  const [error, setError] = useState<AxiosError | Error | null>(null);
+
   const [currentUser, setCurrentUser] = useState<User>({
     username: "cooljmessy",
     name: "Peter Messy",
@@ -29,11 +34,15 @@ const App = () => {
 
 
 
+
   useEffect(() => {
     getCategories()
       .then(resCategories => {
         const categoriesArray = resCategories.map((category: AllCategoriesResponseObj): string => category.slug);
         setAllCategories(categoriesArray);
+      })
+      .catch(error => {
+        setError(error);
       })
   }, [])
 
@@ -49,10 +58,10 @@ const App = () => {
         <div id="App">
           <Routes>
             <Route path="/" element={<ReviewsList
-                allCategories={allCategories}
-                filterParams={filterParams}
-                setFilterParams={setFilterParams}
-              />} />
+              allCategories={allCategories}
+              filterParams={filterParams}
+              setFilterParams={setFilterParams}
+            />} />
             <Route path="/reviews" element={
               <ReviewsList
                 allCategories={allCategories}
@@ -62,6 +71,7 @@ const App = () => {
             } />
             <Route path="/reviews/:review_id" element={<SingleReview />} />
             <Route path="/users" element={<ChooseUser />} />
+            <Route path="*" element={<ErrorPage error={error} />} />
           </Routes>
         </div>
       </UserContext.Provider>
