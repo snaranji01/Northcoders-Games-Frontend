@@ -52,18 +52,25 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
     }
 
     const sortCommentOptions = [
+        { keyName: "created_at", displayName: "Created at" },
         { keyName: "author", displayName: "Author" },
         { keyName: "comment_votes", displayName: "Upvotes" },
-        { keyName: "created_at", displayName: "Created at" }
-    ];
-    /* const sortCommentsHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        const sortBy: string = (e.target as HTMLButtonElement).value;
+    ];    
+    const sortCommentsHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const sortBy: string = e.target.value;
+        console.log(sortBy)
+
         setReviewComments(reviewComments => {
             const reviewCommentsCopy = [...reviewComments];
-            const sortedComments = reviewCommentsCopy.sort((a,b) => a[sortBy]-b[sortBy]);
+            const sortedComments = reviewCommentsCopy.sort((commentA, commentB) => {
+                if (commentA[sortBy] < commentB[sortBy]) {
+                    return 1
+                } else if (commentA[sortBy] > commentB[sortBy]) return -1
+                return 0
+            })
             return sortedComments;
-        }
-    } */
+        })
+    }
     return (
         <>
             <h2>Comments</h2>
@@ -85,35 +92,27 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
                     !isLoadingComments ? (
                         <div className="comments-list">
                             <div className="sort-comments">
-                                <form>
+                                <select 
+                                name="sort-comments-options" 
+                                id="sort-comments-options"
+                                onChange={sortCommentsHandler}
+                                >
                                     {
                                         sortCommentOptions.map(sortCommentOption => {
-
-                                            return (
-                                                <div className="comment-sort-option">
-                                                    <label htmlFor={`sort-by-${sortCommentOption.keyName}`}>{sortCommentOption.displayName}</label>
-                                                    <input
-                                                        type="radio"
-                                                        name="sort-comments-option"
-                                                        id={`sort-by-${sortCommentOption.keyName}`}
-                                                        value={sortCommentOption.keyName}
-                                                    // onClick={sortCommentsHandler}
-                                                    />
-                                                </div>
-                                            )
+                                            return <option
+                                                key={sortCommentOption.keyName}
+                                                value={sortCommentOption.keyName}
+                                            >
+                                                {sortCommentOption.displayName}
+                                            </option>
                                         })
                                     }
-
-
-
-                                </form>
-
-
+                                </select>
                             </div>
                             {
                                 reviewComments.map(reviewComment => {
                                     return (
-                                        <div className="review-comment">
+                                        <div className="review-comment" key={reviewComment.comment_id}>
                                             <h3>{reviewComment.author}</h3>
                                             <p>Date Posted: {formatCreatedAtComment(reviewComment.created_at)}</p>
                                             <p>{reviewComment.body}</p>
