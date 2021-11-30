@@ -31,7 +31,17 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
         setIsLoadingComments(true);
         getReviewCommentsById(review_id)
             .then(response => {
-                setReviewComments(response);
+                setReviewComments(reviewComments => {
+                    let newReviewComments = [...reviewComments];
+                    newReviewComments = response.sort((a,b) => {
+                        if(a.created_at < b.created_at) {
+                            return 1
+                        } else if (a.created_at > b.created_at) {
+                            return -1
+                        } else return 0
+                    });
+                    return newReviewComments
+                });
                 setIsLoadingComments(false);
             })
             .catch(error => {
@@ -49,7 +59,6 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
         { keyName: "author", displayName: "Author" },
         { keyName: "comment_votes", displayName: "Upvotes" },
     ];
-    
 
     if (error) return <ErrorPage error={error} />
     return (

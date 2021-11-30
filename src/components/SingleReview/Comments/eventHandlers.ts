@@ -23,16 +23,23 @@ export const postCommentHandler = (
     postReviewComment(review_id, currentUser.username, commentInputBoxValue)
         .then(() => {
             setReviewComments(reviewComments => {
-                const reviewCommentsCopy: SingleCommentObj[] = JSON.parse(JSON.stringify(reviewComments));
+                let reviewCommentsCopy: SingleCommentObj[] = JSON.parse(JSON.stringify(reviewComments));
                 const latestCommentId = Math.max(...reviewCommentsCopy.map((reviewComment: SingleCommentObj) => reviewComment.comment_id))
                 reviewCommentsCopy.push({
-                    comment_id: latestCommentId,
+                    comment_id: latestCommentId + 1,
                     author: currentUser.username,
                     comment_votes: 0,
-                    body: "",
+                    body: commentInputBoxValue,
                     review_id: parseInt(review_id),
                     created_at: new Date().toString()
                 })
+                reviewCommentsCopy = reviewCommentsCopy.sort((a,b) => {
+                    if(a.created_at < b.created_at) {
+                        return 1
+                    } else if (a.created_at > b.created_at) {
+                        return -1
+                    } else return 0
+                });
                 return reviewCommentsCopy
             })
         })
