@@ -19,7 +19,11 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
     const { currentUser } = useContext(UserContext);
     return (
         <nav id="navbar">
-            <Link className="navbar-item" to="/reviews">Home</Link>
+            <Link
+                className="navbar-item" to="/reviews"
+                onClick={() => setFilterParams(filterParams => ({...filterParams, category:"", sortBy: "", order: ""}) )}
+            >Home
+            </Link>
             <div className="navbar-item" id="dropdown-container">
                 <div className="dropdown">
                     <span>Categories</span>
