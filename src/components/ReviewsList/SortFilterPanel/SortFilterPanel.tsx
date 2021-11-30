@@ -14,6 +14,7 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams }) =>
         { backendName: "owner", frontendName: "Author" },
         { backendName: "created_at", frontendName: "Created at" },
         { backendName: "review_votes", frontendName: "Upvotes" },
+        { backendName: "comment_count", frontendName: "Comment Count" }
     ]
 
     const allOrder = [
