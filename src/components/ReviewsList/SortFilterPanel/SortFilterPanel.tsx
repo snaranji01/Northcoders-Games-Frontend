@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { FilterParams } from "../../../types/types";
 import { setOrderParamHandler, setSortByParamHandler } from "./eventHandlers";
 import './SortFilterPanel.css';
