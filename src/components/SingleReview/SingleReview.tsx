@@ -58,7 +58,9 @@ const SingleReview = () => {
                         </div>
                         <div className="upvotes-container">
                             <p className="review-upvotes">Review votes: {singleReviewData.review_votes}</p>
-                            <p className="review-upvotes">< GoArrowUp /></p>
+                            <p className="review-upvotes">
+                            <GoArrowUp style={{borderStyle: "solid", backgroundColor: "grey"}} />
+                            </p>
                         </div>
                         <div className="article-review-body-container">
                             <p className="review-body">{singleReviewData.review_body}</p>
