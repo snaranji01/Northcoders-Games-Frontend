@@ -33,17 +33,22 @@ const ReviewsList: React.FC<IProps> = ({ filterParams, setFilterParams }) => {
                 setIsLoading(false);
             })
             .catch(error => {
-               setError(error);
+                setError(error);
             })
     }, [filterParams])
-    
-    if(error) return <ErrorPage error={error} />
+
+    if (error) return <ErrorPage error={error} />
     return (
         <div className="list-reviews-page-container">
             <SortFilterPanel filterParams={filterParams} setFilterParams={setFilterParams} />
             <div className="header-and-reviews">
                 <h1 id="header">Northcoders Games</h1>
-                <h2>Category: {formatCategoryNames(categoryFilter)}</h2>
+                {
+                    categoryFilter !== undefined ? (
+                        <h2>Category: {formatCategoryNames(categoryFilter)}</h2>
+                    ) : null
+                }
+
                 <div id="list-reviews-container">
                     {
                         !isLoading ? (
