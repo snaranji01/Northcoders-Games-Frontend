@@ -12,7 +12,6 @@ const SortFilterPanel: React.FC<IProps> = ({ filterParams, setFilterParams }) =>
     const allSortBy = [
         { backendName: "title", frontendName: "Title" },
         { backendName: "owner", frontendName: "Author" },
-        { backendName: "category", frontendName: "Category" },
         { backendName: "created_at", frontendName: "Created at" },
         { backendName: "review_votes", frontendName: "Upvotes" },
     ]
