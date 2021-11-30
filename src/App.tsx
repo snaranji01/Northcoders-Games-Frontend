@@ -58,13 +58,11 @@ const App = () => {
         <div id="App">
           <Routes>
             <Route path="/" element={<ReviewsList
-              allCategories={allCategories}
               filterParams={filterParams}
               setFilterParams={setFilterParams}
             />} />
             <Route path="/reviews" element={
               <ReviewsList
-                allCategories={allCategories}
                 filterParams={filterParams}
                 setFilterParams={setFilterParams}
               />
