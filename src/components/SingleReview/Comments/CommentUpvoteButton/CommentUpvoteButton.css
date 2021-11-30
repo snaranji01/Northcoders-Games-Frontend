@@ -1,0 +1,11 @@
+.comment-upvotes-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 10%;
+    height: 15px;
+}
+
+.comment-upvotes {
+    margin-left: 10px;
+}

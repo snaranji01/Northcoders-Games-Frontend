@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react"
-import { GoArrowUp } from 'react-icons/go';
 
 import './Comments.css';
 
@@ -13,6 +12,7 @@ import { UserContext } from "../../../contexts/User";
 import { AxiosError } from "axios";
 import ErrorPage from "../../ErrorPage/ErrorPage";
 import { onCommentInputTextChangeHandler, postCommentHandler, sortCommentsHandler } from "./eventHandlers";
+import UpvoteButton from "./CommentUpvoteButton/CommentUpvoteButton";
 
 interface IProps {
     review_id: string;
@@ -97,11 +97,7 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
                                             <h3>{reviewComment.author}</h3>
                                             <p>Date Posted: {formatCreatedAtComment(reviewComment.created_at)}</p>
                                             <p>{reviewComment.body}</p>
-                                            <div className="comment-upvotes-container">
-                                                <p className="comment-upvotes">{reviewComment.comment_votes}</p>
-                                                <p className="comment-upvotes"><GoArrowUp /></p>
-                                            </div>
-
+                                            <UpvoteButton reviewComment = {reviewComment}/>
                                         </div>
                                     )
                                 })
