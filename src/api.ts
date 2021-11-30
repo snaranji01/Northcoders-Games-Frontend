@@ -65,3 +65,13 @@ export const getUserByUsername = (username: string): Promise<User> => {
             return response.data.user;
         })
 }
+
+export const patchCommentVotes = (numUpvotes: number, comment_id: number) : Promise<SingleCommentObj> => {
+    const reqBody = {
+        inc_votes: numUpvotes
+    }
+    console.log(reqBody)
+    return ncgamesAPI
+        .patch(`/comments/${comment_id}`, reqBody)
+        .then(response => response.data.updatedComment)
+}
