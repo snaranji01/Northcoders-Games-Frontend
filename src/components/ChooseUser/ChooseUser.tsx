@@ -7,6 +7,7 @@ import { User } from "../../types/types";
 import { UserContext } from "../../contexts/User";
 import { AxiosError } from "axios";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import { handleChooseUserHandler } from "./eventHandlers";
 
 const ChooseUser = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -27,12 +28,6 @@ const ChooseUser = () => {
             })
     }, [currentUser])
 
-    const handleChooseUserHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const chosenUserButton = (e.target as HTMLButtonElement).value;
-        const [chosenUser] = allUsers.filter(existingUser => existingUser.username === chosenUserButton);
-        setCurrentUser(chosenUser);
-    }
-
     if (error) return <ErrorPage error={error} />
     return (
         isLoading ? <p>Loading...</p>
@@ -41,7 +36,7 @@ const ChooseUser = () => {
                     <h1>Select a user:</h1>
                     <div id="select-user-buttons">
                         {allUsers.map(user => {
-                            return <button key={user.username} className="select-user-button" value={user.username} onClick={handleChooseUserHandler}>
+                            return <button key={user.username} className="select-user-button" value={user.username} onClick={e => handleChooseUserHandler(e, allUsers, setCurrentUser)}>
                                 {user.username}
                             </button>
                         })}
