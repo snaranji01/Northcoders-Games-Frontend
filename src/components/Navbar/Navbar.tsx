@@ -49,10 +49,19 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
                 </div>
             </div>
             <Link id="users-link" className="navbar-item" to="/users">Users</Link>
-            <div id='current-user-icon'>
-                <div>Username: {currentUser.username}</div>
-                <img id="current-user-avatar" src={currentUser.avatar_url} alt="Current user's avatar" />
-            </div>
+            {
+                currentUser !== null ? (
+                    <div id='current-user-icon'>
+                        <div>Username: {currentUser.username}</div>
+                        <img id="current-user-avatar" src={currentUser.avatar_url} alt="Current user's avatar" />
+                    </div>
+                ) : (
+                    <div id='current-user-icon'>
+                        Please sign in
+                    </div>
+                )
+            }
+
         </nav>
     )
 }
