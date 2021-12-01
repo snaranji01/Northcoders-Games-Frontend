@@ -26,11 +26,7 @@ const App = () => {
 
   const [error, setError] = useState<AxiosError | Error | null>(null);
 
-  const [currentUser, setCurrentUser] = useState<User>({
-    username: "cooljmessy",
-    name: "Peter Messy",
-    avatar_url: "https://vignette.wikia.nocookie.net/mrmen/images/1/1a/MR_MESSY_4A.jpg/revision/latest/scale-to-width-down/250?cb=20170730171002"
-  });
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
 
 
