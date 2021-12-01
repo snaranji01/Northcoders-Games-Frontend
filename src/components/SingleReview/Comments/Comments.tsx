@@ -52,7 +52,7 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
     const [commentInputBoxValue, setCommentInputBoxValue] = useState<string>('');
 
 
-    
+
 
     const sortCommentOptions = [
         { keyName: "created_at", displayName: "Created at" },
@@ -64,19 +64,24 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
     return (
         <>
             <h2>Comments</h2>
-            <div className="add-comment">
-                <form onSubmit={e => postCommentHandler(e, setReviewComments, review_id, currentUser, commentInputBoxValue, error, setError)}>
-                    <label htmlFor="add-comment-input">Post a comment as <span style={{ fontWeight: "bold" }}>{currentUser.username}</span>: </label>
-                    <input
-                        type="text"
-                        name="add-comment-input"
-                        id="add-comment-input"
-                        value={commentInputBoxValue}
-                        onChange={e => onCommentInputTextChangeHandler(e, setCommentInputBoxValue)}
-                    />
-                    <button type="submit">Post comment</button>
-                </form>
-            </div>
+            {
+                currentUser !== null ? (
+                    <div className="add-comment">
+                        <form onSubmit={e => postCommentHandler(e, setReviewComments, review_id, currentUser, commentInputBoxValue, error, setError)}>
+                            <label htmlFor="add-comment-input">Post a comment as <span style={{ fontWeight: "bold" }}>{currentUser.username}</span>: </label>
+                            <input
+                                type="text"
+                                name="add-comment-input"
+                                id="add-comment-input"
+                                value={commentInputBoxValue}
+                                onChange={e => onCommentInputTextChangeHandler(e, setCommentInputBoxValue)}
+                            />
+                            <button type="submit">Post comment</button>
+                        </form>
+                    </div>
+                ) : null
+            }
+
             {
                 reviewComments.length !== 0 ? (
                     !isLoadingComments ? (
