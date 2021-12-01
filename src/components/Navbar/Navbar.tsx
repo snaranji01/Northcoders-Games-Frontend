@@ -21,7 +21,7 @@ const Navbar: React.FC<IProps> = ({ allCategories, setFilterParams }) => {
         <nav id="navbar">
             <Link
                 className="navbar-item" to="/reviews"
-                onClick={() => setFilterParams(filterParams => ({...filterParams, category:"", sortBy: "", order: ""}) )}
+                onClick={() => setFilterParams(filterParams => ({ ...filterParams, category: "", sortBy: "", order: "" }))}
             >Home
             </Link>
             <div className="navbar-item" id="dropdown-container">
