@@ -7,7 +7,7 @@ import { User } from "../../types/types";
 import { UserContext } from "../../contexts/User";
 import { AxiosError } from "axios";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import { handleChooseUserHandler } from "./eventHandlers";
+//import { handleChooseUserHandler } from "./eventHandlers";
 
 const ChooseUser = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
