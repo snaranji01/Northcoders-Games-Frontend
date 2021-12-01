@@ -15,7 +15,7 @@ const ChooseUser = () => {
     const [error, setError] = useState<AxiosError | Error | null>(null);
 
     const { currentUser, setCurrentUser } = useContext(UserContext);
-    
+
     useEffect(() => {
         setIsLoading(true);
         getUsers()
@@ -42,6 +42,12 @@ const ChooseUser = () => {
                             </p>
                         })}
                     </div>
+                    <p>Please enter the name of the user you wish to login as:</p>
+                    <form>
+                        <label htmlFor="type-desired-user">Username: </label>
+                        <input type="text" name="type-desired-user" id="type-desired-user" />
+                        <button type="submit">Sign-In</button>
+                    </form>
                 </div>
             )
     )
