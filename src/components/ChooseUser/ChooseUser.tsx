@@ -33,12 +33,13 @@ const ChooseUser = () => {
         isLoading ? <p>Loading...</p>
             : (
                 <div className="select-user-page">
-                    <h1>Select a user:</h1>
-                    <div id="select-user-buttons">
+                    <h1>User Login</h1>
+                    <p>Available users: </p>
+                    <div id="available users">
                         {allUsers.map(user => {
-                            return <button key={user.username} className="select-user-button" value={user.username} onClick={e => handleChooseUserHandler(e, allUsers, setCurrentUser)}>
+                            return <p key={user.username} className="available-user">
                                 {user.username}
-                            </button>
+                            </p>
                         })}
                     </div>
                 </div>
