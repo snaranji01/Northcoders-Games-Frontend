@@ -33,8 +33,8 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
             .then(response => {
                 setReviewComments(reviewComments => {
                     let newReviewComments = [...reviewComments];
-                    newReviewComments = response.sort((a,b) => {
-                        if(a.created_at < b.created_at) {
+                    newReviewComments = response.sort((a, b) => {
+                        if (a.created_at < b.created_at) {
                             return 1
                         } else if (a.created_at > b.created_at) {
                             return -1
@@ -106,7 +106,7 @@ const Comments: React.FC<IProps> = ({ review_id }) => {
                                             <h3>{reviewComment.author}</h3>
                                             <p>Date Posted: {formatCreatedAtComment(reviewComment.created_at)}</p>
                                             <p>{reviewComment.body}</p>
-                                            <UpvoteButton reviewComment = {reviewComment}/>
+                                            <UpvoteButton reviewComment={reviewComment} />
                                         </div>
                                     )
                                 })
