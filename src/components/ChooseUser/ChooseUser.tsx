@@ -38,6 +38,7 @@ const ChooseUser = () => {
                     <h1>User Login</h1>
                     <p>Available users: </p>
                     <div id="available-users">
+                        <p>Available users: </p>
                         {allUsers.map(user => {
                             return <p key={user.username} className="available-user">
                                 {user.username}
@@ -46,6 +47,7 @@ const ChooseUser = () => {
                     </div>
                     <p>Please enter the name of the user you wish to login as:</p>
                     <form onSubmit={e => handleSubmitLogin(e, allUsers, setCurrentUser, usernameInputText)}>
+                        <p>Please enter the name of the user you wish to login as:</p>
                         <label htmlFor="type-desired-user">Username: </label>
                         <input
                             type="text"
