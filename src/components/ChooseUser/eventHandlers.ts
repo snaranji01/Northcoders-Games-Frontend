@@ -5,10 +5,19 @@ export const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>, setUser
     setUsernameInputText((e.target as HTMLInputElement).value)
 }
 
-    allUsers: User[],
-    setCurrentUser: Dispatch<SetStateAction<User>>
+export const handleSubmitLogin = (
+    e: React.FormEvent<HTMLFormElement>, 
+    allUsers: User[], 
+    setCurrentUser: Dispatch<SetStateAction<User | null>>, 
+    usernameInputText: string
     ) => {
-    const chosenUserButton = (e.target as HTMLButtonElement).value;
-    const [chosenUser] = allUsers.filter(existingUser => existingUser.username === chosenUserButton);
+    e.preventDefault();
+
+    const [chosenUser] = allUsers.filter(existingUser => existingUser.username === usernameInputText);
+    console.log(chosenUser)
+    if(chosenUser === undefined) {
+        setCurrentUser(null);
+    }
+
     setCurrentUser(chosenUser);
 }
