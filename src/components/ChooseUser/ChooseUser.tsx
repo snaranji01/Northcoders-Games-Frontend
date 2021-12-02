@@ -37,7 +37,7 @@ const ChooseUser = () => {
                 <div className="select-user-page">
                     <h1>User Login</h1>
                     <p>Available users: </p>
-                    <div id="available users">
+                    <div id="available-users">
                         {allUsers.map(user => {
                             return <p key={user.username} className="available-user">
                                 {user.username}
