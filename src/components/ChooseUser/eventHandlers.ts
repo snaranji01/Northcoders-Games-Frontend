@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { User } from "../../types/types";
 
-export const handleChooseUserHandler = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+export const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>, setUsernameInputText: Dispatch<SetStateAction<string>>) => {
+    setUsernameInputText((e.target as HTMLInputElement).value)
+}
+
     allUsers: User[],
     setCurrentUser: Dispatch<SetStateAction<User>>
     ) => {
