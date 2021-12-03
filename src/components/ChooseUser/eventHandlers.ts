@@ -6,18 +6,21 @@ export const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>, setUser
 }
 
 export const handleSubmitLogin = (
-    e: React.FormEvent<HTMLFormElement>, 
-    allUsers: User[], 
-    setCurrentUser: Dispatch<SetStateAction<User | null>>, 
-    usernameInputText: string
-    ) => {
+    e: React.FormEvent<HTMLFormElement>,
+    allUsers: User[],
+    setCurrentUser: Dispatch<SetStateAction<User | null>>,
+    usernameInputText: string,
+    usernameInputValidationMethod: string,
+    setUsernameInputValidationMessage: Dispatch<SetStateAction<string>>
+) => {
     e.preventDefault();
 
     const [chosenUser] = allUsers.filter(existingUser => existingUser.username === usernameInputText);
-    console.log(chosenUser)
-    if(chosenUser === undefined) {
-        setCurrentUser(null);
-    }
 
-    setCurrentUser(chosenUser);
+    if (chosenUser === undefined) {
+        setUsernameInputValidationMessage('No user with that username was found. Please try again.')
+    } else {
+        setCurrentUser(chosenUser);
+        setUsernameInputValidationMessage('');
+    }
 }

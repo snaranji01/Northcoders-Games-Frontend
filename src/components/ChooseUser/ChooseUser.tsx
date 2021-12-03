@@ -9,6 +9,8 @@ import { AxiosError } from "axios";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import { handleSubmitLogin, handleTextChange } from "./eventHandlers";
 
+import './ChooseUser.css';
+
 const ChooseUser = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,6 +19,8 @@ const ChooseUser = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
 
     const [usernameInputText, setUsernameInputText] = useState<string>('');
+
+    const [usernameInputValidationMessage, setUsernameInputValidationMessage] = useState<string>('');
 
     useEffect(() => {
         setIsLoading(true);
@@ -35,18 +39,26 @@ const ChooseUser = () => {
         isLoading ? <p>Loading...</p>
             : (
                 <div className="select-user-page">
-                    <h1>User Login</h1>
-                    <p>Available users: </p>
+                    <h1 id="user-login-header">User Login</h1>
                     <div id="available-users">
-                        <p>Available users: </p>
+                        <p id="describe-available-users">Available users: </p>
                         {allUsers.map(user => {
                             return <p key={user.username} className="available-user">
                                 {user.username}
                             </p>
                         })}
                     </div>
-                    <p>Please enter the name of the user you wish to login as:</p>
-                    <form onSubmit={e => handleSubmitLogin(e, allUsers, setCurrentUser, usernameInputText)}>
+                    <form id="enter-username" onSubmit={
+                        e => handleSubmitLogin(
+                            e,
+                            allUsers,
+                            setCurrentUser,
+                            usernameInputText,
+                            usernameInputValidationMessage,
+                            setUsernameInputValidationMessage
+                        )
+                    }
+                    >
                         <p>Please enter the name of the user you wish to login as:</p>
                         <label htmlFor="type-desired-user">Username: </label>
                         <input
@@ -56,6 +68,7 @@ const ChooseUser = () => {
                             value={usernameInputText}
                             onChange={e => handleTextChange(e, setUsernameInputText)} />
                         <button type="submit">Sign-In</button>
+                        <p className="input-validation-message">{usernameInputValidationMessage}</p>
                     </form>
                 </div>
             )
