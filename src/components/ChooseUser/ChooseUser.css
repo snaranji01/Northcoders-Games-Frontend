@@ -1,0 +1,30 @@
+#user-login-header {
+    text-align: center;
+}
+
+#enter-username {
+    width: 400px;
+    text-align: center;
+    background-color: lightblue;
+    padding: 10px;
+}
+
+#available-users-text {
+    padding: 0px;
+    margin: 0px;
+}
+
+#available-users {
+    display: flex;
+    flex-direction: row;
+}
+.available-user {
+    margin-left: 1vw;
+    border-style: solid;
+    background-color: lightgreen;
+    padding: 5px;
+}
+
+.input-validation-message {
+    color: red;
+}
